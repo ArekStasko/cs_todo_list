@@ -10,18 +10,19 @@ namespace ToDoList
         public int OptionID { get; set; }
     }
 
-    class Options
+    public class Options
     {
         private List<Option> options = new List<Option>();
         private string[] optionList = new string[] { "Show all items", "Show single item", "Edit items" };
         
-        public void initializeOptions()
+        public List<Option> initializeOptions()
         {
             for(int i=0; i<optionList.Length; i++)
             {
                 options.Add(new Option() { OptionName=$"{i+1}. {optionList[i]}", OptionID=i });
             }
             Console.WriteLine("- Hello in my ToDo App ! -");
+            return options;
         }
 
         public int getOptions()
