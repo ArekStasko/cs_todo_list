@@ -21,8 +21,8 @@ namespace ToDoList
                 case 2:
                     Console.WriteLine(selectedOption);
                     break;
-                case 3:
-                    Console.WriteLine(selectedOption);
+                case 3: 
+                    int userSelection = optionsInitializer.GetEditionOptions();
                     break;
             }
         }
