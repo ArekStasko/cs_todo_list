@@ -10,9 +10,11 @@ namespace ToDoList
             Options optionsInitializer = new Options();
             optionsInitializer.initializeOptions();
 
+            ActionService actionService = new ActionService();
+
             int selectedOption = optionsInitializer.getOptions();
 
-
+            
             switch (selectedOption)
             {
                 case 1:
@@ -21,8 +23,9 @@ namespace ToDoList
                 case 2:
                     Console.WriteLine(selectedOption);
                     break;
-                case 3: 
+                case 3:
                     int userSelection = optionsInitializer.GetEditionOptions();
+                    actionService.ChooseEditionMethod(userSelection);
                     break;
             }
         }
