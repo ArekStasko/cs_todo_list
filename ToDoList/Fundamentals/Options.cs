@@ -13,7 +13,7 @@ namespace ToDoList
     public class Options
     {
         private List<Option> options = new List<Option>();
-        private string[] optionList = new string[] { "Show all items", "Show single item", "Edit items" };
+        private string[] optionList = new string[] { "Show all items", "Show single item", "Edit items", "Close ToDo list" };
         private string[] editionOptions = new string[] { "Add new Category", "Add new Product", "Delete Product" };
 
         public List<Option> initializeOptions()

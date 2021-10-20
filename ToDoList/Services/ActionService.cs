@@ -7,8 +7,14 @@ namespace ToDoList
 {
     public class ActionService
     {
-        
-        MainStorage mainStorage = new MainStorage();
+        private List<Item> _mainStorageItems;
+        private List<Category> _mainStorageCategories;
+
+        public ActionService(List<Item> storageItems, List<Category> storageCategories)
+        {
+            _mainStorageItems = storageItems;
+            _mainStorageCategories = storageCategories;
+        }
 
         public void ChooseEditionMethod(int selection)
         {
@@ -18,7 +24,7 @@ namespace ToDoList
                     AddCategory(null);
                     break;
                 case 2:
-                    if(mainStorage.categories.Count == 0)
+                    if(_mainStorageCategories.Count == 0)
                     {
                         Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
                         AddCategory(null);
@@ -40,7 +46,7 @@ namespace ToDoList
             string categoryName = ctgName != null ? ctgName : Console.ReadLine();
             Category newCategory = new Category() { CategoryName = categoryName };
 
-            mainStorage.categories.Add(newCategory);
+            _mainStorageCategories.Add(newCategory);
         }
 
         public void AddProduct()
@@ -48,11 +54,14 @@ namespace ToDoList
             Console.WriteLine("- Please choose category of your product -");
 
             int index = 0;
-            foreach(var cat in mainStorage.categories)
+            foreach(var cat in _mainStorageCategories)
             {
+                Console.WriteLine($"{index+1}. {cat.CategoryName}");
                 index++;
-                Console.WriteLine($"{index+1}. {cat}");
             }
+            string selectedCat = Console.ReadLine();
+            int selectedCategory = Int32.Parse(selectedCat) - 1;
+            Console.WriteLine($"category: {_mainStorageCategories[selectedCategory].CategoryName}");
         }
     }
 }

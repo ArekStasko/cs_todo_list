@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ToDoList.Storage;
 
 namespace ToDoList
 {
@@ -8,26 +9,32 @@ namespace ToDoList
         static void Main(string[] args)
         {
             Options optionsInitializer = new Options();
+            MainStorage mainStorage = new MainStorage();
             optionsInitializer.initializeOptions();
 
-            ActionService actionService = new ActionService();
+            ActionService actionService = new ActionService(mainStorage.items, mainStorage.categories);
 
-            int selectedOption = optionsInitializer.getOptions();
+            int selectedOption = 0;
 
-            
-            switch (selectedOption)
+            while (selectedOption != 4)
             {
-                case 1:
-                    Console.WriteLine(selectedOption);
-                    break;
-                case 2:
-                    Console.WriteLine(selectedOption);
-                    break;
-                case 3:
-                    int userSelection = optionsInitializer.GetEditionOptions();
-                    actionService.ChooseEditionMethod(userSelection);
-                    break;
+                selectedOption = optionsInitializer.getOptions();
+                switch (selectedOption)
+                {
+                    case 1:
+                        Console.WriteLine(selectedOption);
+                        break;
+                    case 2:
+                        Console.WriteLine(selectedOption);
+                        break;
+                    case 3:
+                        int userSelection = optionsInitializer.GetEditionOptions();
+                        actionService.ChooseEditionMethod(userSelection);
+                        break;
+                }
             }
+            Console.WriteLine("Goodbye !");
+            
         }
     }
 }
