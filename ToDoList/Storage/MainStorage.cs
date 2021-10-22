@@ -7,7 +7,7 @@ namespace ToDoList.Storage
         public string ItemName { get; set; }
         public string ItemCategory { get; set; }
         public string ItemDescription { get; set; }
-        public int ItemId { get; set; }
+        public string ItemId { get; set; }
 
     }
 

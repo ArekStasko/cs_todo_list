@@ -22,7 +22,10 @@ namespace ToDoList
                 switch (selectedOption)
                 {
                     case 1:
-                        Console.WriteLine(selectedOption);
+                        foreach (var item in mainStorage.items)
+                        {
+                            Console.WriteLine(item.ItemName);
+                        }
                         break;
                     case 2:
                         Console.WriteLine(selectedOption);

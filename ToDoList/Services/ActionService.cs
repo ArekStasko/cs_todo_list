@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ToDoList.Storage;
+using ToDoList.Services;
+using System.Linq;
 
 namespace ToDoList
 {
     public class ActionService
     {
+        ServiceHelpers serviceHelpers = new ServiceHelpers();
         private List<Item> _mainStorageItems;
         private List<Category> _mainStorageCategories;
 
@@ -29,17 +31,15 @@ namespace ToDoList
                         Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
                         AddCategory(null);
                     }
-                    else
-                    {
-                        AddProduct();
-                    }
+                    else AddProduct();
                     break;
                 case 3:
+                    if (_mainStorageItems.Count != 0) DeleteProduct();
+                    else Console.WriteLine("Whoops, you don't have any items");
                     break;
             }
         }
 
-        //I will separate ReadLines to separated class to make the code more responsibility
         public void AddCategory(string ctgName)
         {
             Console.WriteLine("- Please insert new category name -");
@@ -61,7 +61,23 @@ namespace ToDoList
             }
             string selectedCat = Console.ReadLine();
             int selectedCategory = Int32.Parse(selectedCat) - 1;
-            Console.WriteLine($"category: {_mainStorageCategories[selectedCategory].CategoryName}");
+
+            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory].CategoryName);
+
+            _mainStorageItems.Add(newItem);
+        }
+
+        public void DeleteProduct()
+        {
+            string itemID = serviceHelpers.getItemID("delete");
+            var itemToDelete = _mainStorageItems.SingleOrDefault(item => item.ItemId == itemID);
+
+            if (itemToDelete != null)
+            {
+                _mainStorageItems.Remove(itemToDelete);
+                Console.WriteLine("Successfull deleted item");
+            }
+            else Console.WriteLine("Sorry we couldn't find this item");
         }
     }
 }
