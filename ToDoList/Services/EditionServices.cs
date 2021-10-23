@@ -59,10 +59,15 @@ namespace ToDoList
                 Console.WriteLine($"{index+1}. {cat.CategoryName}");
                 index++;
             }
-            string selectedCat = Console.ReadLine();
-            int selectedCategory = Int32.Parse(selectedCat) - 1;
+            int selectedCategory = serviceHelpers.getUserSelection("- Please choose one category -");
 
-            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory].CategoryName);
+            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory-1].CategoryName);
+
+            while (_mainStorageItems.SingleOrDefault(item => item.ItemId == newItem.ItemId) != null)
+            {
+                Console.WriteLine("- You already have item with this ID -");
+                newItem.ItemId = Console.ReadLine();
+            }
 
             _mainStorageItems.Add(newItem);
         }

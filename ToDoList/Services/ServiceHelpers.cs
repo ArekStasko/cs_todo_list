@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using ToDoList.Storage;
 
 namespace ToDoList.Services
 {
     public class ServiceHelpers
     {
-
 
         public Item createNewItem(string category)
         {
@@ -28,15 +28,24 @@ namespace ToDoList.Services
             return newItem;
         }
 
+        public int getUserSelection(string message)
+        {
+            Console.WriteLine($"{message}");
+            string userSelection = Console.ReadLine();
+            while(!int.TryParse(userSelection, out int n))
+            {
+                Console.WriteLine("- Please insert number of option -");
+                userSelection = Console.ReadLine();
+            }
 
+            return Int32.Parse(userSelection);
+        }
 
         public string getItemID(string action)
         {
             Console.WriteLine($"Please provide the item ID to {action}");
             return Console.ReadLine();
         }
-
-
 
         public void itemRowCreator(Item item)
         {

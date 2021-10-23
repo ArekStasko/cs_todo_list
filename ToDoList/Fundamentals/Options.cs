@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoList.Services;
 
 namespace ToDoList
 {
@@ -12,10 +13,11 @@ namespace ToDoList
 
     public class Options
     {
+        ServiceHelpers serviceHelpers = new ServiceHelpers();
         private List<Option> options = new List<Option>();
         private string[] optionList = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
         private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item" };
-
+        
         public List<Option> initializeOptions()
         {
             for(int i=0; i<optionList.Length; i++)
@@ -32,9 +34,7 @@ namespace ToDoList
             {
                 Console.WriteLine(option.OptionName);
             }
-            Console.WriteLine("- Please choose one option - ");
-            string choseOption = Console.ReadLine();
-            return Int32.Parse(choseOption);
+            return serviceHelpers.getUserSelection("- Please choose one option -");
         }
         public int GetEditionOptions()
         {
@@ -44,9 +44,7 @@ namespace ToDoList
             {
                 Console.WriteLine($"{i + 1}. {editionOptions[i]}");
             }
-
-            string optionChoose = Console.ReadLine();
-            return Int32.Parse(optionChoose);
+            return serviceHelpers.getUserSelection("- Please choose one option -");
         }
     }
 }
