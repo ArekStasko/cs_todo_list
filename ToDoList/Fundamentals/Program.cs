@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using ToDoList.Storage;
+using ToDoList.Services;
 
 namespace ToDoList
 {
@@ -12,7 +12,9 @@ namespace ToDoList
             MainStorage mainStorage = new MainStorage();
             optionsInitializer.initializeOptions();
 
-            ActionService actionService = new ActionService(mainStorage.items, mainStorage.categories);
+            // Here i will implement inheritance
+            EditionServices actionServices = new EditionServices(mainStorage.items, mainStorage.categories);
+            ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
 
             int selectedOption = 0;
 
@@ -22,17 +24,14 @@ namespace ToDoList
                 switch (selectedOption)
                 {
                     case 1:
-                        foreach (var item in mainStorage.items)
-                        {
-                            Console.WriteLine(item.ItemName);
-                        }
+                        showServices.ShowAllItems();
                         break;
                     case 2:
-                        Console.WriteLine(selectedOption);
+                        showServices.ShowSingleItem();
                         break;
                     case 3:
                         int userSelection = optionsInitializer.GetEditionOptions();
-                        actionService.ChooseEditionMethod(userSelection);
+                        actionServices.ChooseEditionMethod(userSelection);
                         break;
                 }
             }

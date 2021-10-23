@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace ToDoList
 {
-    public class ActionService
+    public class EditionServices
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
         private List<Item> _mainStorageItems;
         private List<Category> _mainStorageCategories;
 
-        public ActionService(List<Item> storageItems, List<Category> storageCategories)
+        public EditionServices(List<Item> storageItems, List<Category> storageCategories)
         {
             _mainStorageItems = storageItems;
             _mainStorageCategories = storageCategories;
