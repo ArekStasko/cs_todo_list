@@ -18,15 +18,15 @@ namespace ToDoList
         private string[] optionList = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
         private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item" };
         
-        public List<Option> initializeOptions()
+        public Options()
         {
-            for(int i=0; i<optionList.Length; i++)
-            {
-                options.Add(new Option() { OptionName=$"{i+1}. {optionList[i]}", OptionID=i });
-            }
             Console.WriteLine("- Hello in my ToDo App ! -");
-            return options;
+            for (int i = 0; i < optionList.Length; i++)
+            {
+                options.Add(new Option() { OptionName = $"{i + 1}. {optionList[i]}", OptionID = i });
+            }
         }
+
 
         public int getOptions()
         {
