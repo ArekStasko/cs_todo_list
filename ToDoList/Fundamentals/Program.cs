@@ -11,7 +11,6 @@ namespace ToDoList
             Options optionsInitializer = new Options();
             MainStorage mainStorage = new MainStorage();
 
-            // Here i will implement inheritance
             EditionServices actionServices = new EditionServices(mainStorage.items, mainStorage.categories);
             ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
 

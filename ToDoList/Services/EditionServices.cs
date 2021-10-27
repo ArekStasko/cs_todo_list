@@ -74,8 +74,9 @@ namespace ToDoList
 
         public void DeleteProduct()
         {
-            string itemID = serviceHelpers.getItemID("delete");
-            var itemToDelete = _mainStorageItems.SingleOrDefault(item => item.ItemId == itemID);
+            Console.WriteLine("Please provide the item ID to delete");
+            string itemID = Console.ReadLine();
+            var itemToDelete = _mainStorageItems.Find(item => item.ItemId == itemID);
 
             if (itemToDelete != null)
             {

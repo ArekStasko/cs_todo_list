@@ -29,12 +29,25 @@ namespace ToDoList.Services
         public void ShowSingleItem()
         {
 
-            string itemFeature = serviceHelpers.wantedItemFeature();
-            foreach(var item in _mainStorageItems)
-            {
-                if (item.ItemCategory == itemFeature || item.ItemId == itemFeature) serviceHelpers.itemRowCreator(item);
-            }
 
+            string userSelection = serviceHelpers.wantedItemFeature();
+
+            switch (userSelection)
+            {
+                // I will separate the wantedItemByID and wantedItemByCategory
+                case "1":
+                    Console.WriteLine("- Please insert item ID -");
+                    string itemID = Console.ReadLine();
+                    var wantedItemByID = _mainStorageItems.Find(item => item.ItemId == itemID);
+                    serviceHelpers.itemRowCreator(wantedItemByID);
+                    break;
+                case "2":
+                    Console.WriteLine("- Please insert items category -");
+                    string itemCategory = Console.ReadLine();
+                    var wantedItemByCategory = _mainStorageItems.Find(item => item.ItemCategory == itemCategory);
+                    serviceHelpers.itemRowCreator(wantedItemByCategory);
+                    break;
+            }
 
         }
 

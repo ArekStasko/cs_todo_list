@@ -5,34 +5,18 @@ using ToDoList.Services;
 
 namespace ToDoList
 {
-    public class Option
-    {
-        public string OptionName { get; set; }
-        public int OptionID { get; set; }
-    }
-
     public class Options
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
-        private List<Option> options = new List<Option>();
-        private string[] optionList = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
+        private string[] options = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
         private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item" };
-        
-        public Options()
-        {
-            Console.WriteLine("- Hello in my ToDo App ! -");
-            for (int i = 0; i < optionList.Length; i++)
-            {
-                options.Add(new Option() { OptionName = $"{i + 1}. {optionList[i]}", OptionID = i });
-            }
-        }
 
 
         public int getOptions()
         {
-            foreach(var option in options)
+            for (int i=0; i<options.Length; i++)
             {
-                Console.WriteLine(option.OptionName);
+                Console.WriteLine($"{i+1}. {options[i]}");
             }
             return serviceHelpers.getUserSelection("- Please choose one option -");
         }
