@@ -7,17 +7,13 @@ namespace ToDoList.Storage
         public string ItemName { get; set; }
         public string ItemCategory { get; set; }
         public string ItemDescription { get; set; }
-        public string ItemId { get; set; }
+        public int ItemID { get; set; }
 
     }
-
-    public class Category
-    {
-        public string CategoryName { get; set; }
-    }
+    
     public class MainStorage
     {
         public List<Item> items = new List<Item>();
-        public List<Category> categories = new List<Category>();
+        public List<string> categories = new List<string>();
     }
 }

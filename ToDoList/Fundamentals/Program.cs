@@ -13,7 +13,7 @@ namespace ToDoList
 
             EditionServices actionServices = new EditionServices(mainStorage.items, mainStorage.categories);
             ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
-
+            
             int selectedOption = 0;
 
             while (selectedOption != 4)

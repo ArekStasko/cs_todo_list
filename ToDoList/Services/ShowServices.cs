@@ -8,8 +8,8 @@ namespace ToDoList.Services
     public class ShowServices
     {
         private List<Item> _mainStorageItems;
-        private List<Category> _mainStorageCategories;
-        public ShowServices(List<Item> storageItems, List<Category> storageCategories)
+        private List<string> _mainStorageCategories;
+        public ShowServices(List<Item> storageItems, List<string> storageCategories)
         {
             _mainStorageItems = storageItems;
             _mainStorageCategories = storageCategories;
@@ -34,18 +34,20 @@ namespace ToDoList.Services
 
             switch (userSelection)
             {
-                // I will separate the wantedItemByID and wantedItemByCategory
                 case "1":
                     Console.WriteLine("- Please insert item ID -");
-                    string itemID = Console.ReadLine();
-                    var wantedItemByID = _mainStorageItems.Find(item => item.ItemId == itemID);
-                    serviceHelpers.itemRowCreator(wantedItemByID);
+                    string userInput = Console.ReadLine();
+                    int itemID = serviceHelpers.validateID(userInput);
+                    var wantedItemByID = _mainStorageItems.Find(item => item.ItemID == itemID);
+                    if(wantedItemByID == null) Console.WriteLine("-You don't have item with this ID-");
+                    else serviceHelpers.itemRowCreator(wantedItemByID);
                     break;
                 case "2":
                     Console.WriteLine("- Please insert items category -");
                     string itemCategory = Console.ReadLine();
                     var wantedItemByCategory = _mainStorageItems.Find(item => item.ItemCategory == itemCategory);
-                    serviceHelpers.itemRowCreator(wantedItemByCategory);
+                    if (wantedItemByCategory != null) serviceHelpers.itemRowCreator(wantedItemByCategory);
+                    else Console.WriteLine("You don't have item with this category");
                     break;
             }
 

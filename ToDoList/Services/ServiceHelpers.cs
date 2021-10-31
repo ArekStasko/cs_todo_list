@@ -10,18 +10,32 @@ namespace ToDoList.Services
         public Item createNewItem(string category)
         {
             string[] itemQuery = new string[] { "Item Name", "Item Description", "Item ID" };
-            string[] itemData = new string[4];
+            List<string> itemData = new List<string>(4) {"","","",""};
 
             for(int i=0; i<itemQuery.Length; i++)
             {
                 Console.WriteLine($"Insert {itemQuery[i]}");
-                itemData[i] = Console.ReadLine();
+                string providedData = Console.ReadLine();
+
+                while (String.IsNullOrEmpty(providedData))
+                {
+                    Console.WriteLine("-You can't add empty data-");
+                    providedData = Console.ReadLine();
+                }
+
+                itemData[i] = providedData;
             }
-            
+
+            while(!Int32.TryParse(itemData[2], out int n))
+            {
+                Console.WriteLine("-ID of item must be number-");
+                itemData[2] = Console.ReadLine();
+            }
+
             Item newItem = new Item() {
                 ItemName = itemData[0],
                 ItemDescription = itemData[1],
-                ItemId = itemData[2],
+                ItemID = Int32.Parse(itemData[2]),
                 ItemCategory = category
             };
 
@@ -32,7 +46,8 @@ namespace ToDoList.Services
         {
             Console.WriteLine($"{message}");
             string userSelection = Console.ReadLine();
-            while(!int.TryParse(userSelection, out int n))
+            bool isSelectionCorrect = Int32.TryParse(userSelection, out int n);
+            while (!isSelectionCorrect)
             {
                 Console.WriteLine("- Please insert number of option -");
                 userSelection = Console.ReadLine();
@@ -43,7 +58,7 @@ namespace ToDoList.Services
 
         public void itemRowCreator(Item item)
         {
-            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", item.ItemId, item.ItemCategory, item.ItemName, item.ItemDescription);
+            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", item.ItemID, item.ItemCategory, item.ItemName, item.ItemDescription);
             Console.WriteLine(itemRow);
         }
 
@@ -57,9 +72,27 @@ namespace ToDoList.Services
             for (int i = 0; i < itemOptions.Length; i++) 
             {
                 Console.WriteLine($"{i + 1}. {itemOptions[i]}");
-            }           
+            }
 
-            return Console.ReadLine();
+            string userSelection = Console.ReadLine();
+            while(String.IsNullOrEmpty(userSelection) || !Int32.TryParse(userSelection, out int n))
+            {
+                Console.WriteLine("-Please insert correct option-");
+                userSelection = Console.ReadLine();
+            }
+
+            return userSelection;
+        }
+
+        public int validateID(string userInput)
+        {
+            string ID = userInput;
+            while(!Int32.TryParse(ID, out int n))
+            {
+                Console.WriteLine("ID must be number");
+                ID = Console.ReadLine();
+            }
+            return Int32.Parse(ID);
         }
     }
 }

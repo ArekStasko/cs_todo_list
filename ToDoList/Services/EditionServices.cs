@@ -10,9 +10,9 @@ namespace ToDoList
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
         private List<Item> _mainStorageItems;
-        private List<Category> _mainStorageCategories;
+        private List<string> _mainStorageCategories;
 
-        public EditionServices(List<Item> storageItems, List<Category> storageCategories)
+        public EditionServices(List<Item> storageItems, List<string> storageCategories)
         {
             _mainStorageItems = storageItems;
             _mainStorageCategories = storageCategories;
@@ -23,13 +23,13 @@ namespace ToDoList
             switch (selection)
             {
                 case 1:
-                    AddCategory(null);
+                    this.AddCategory();
                     break;
                 case 2:
                     if(_mainStorageCategories.Count == 0)
                     {
                         Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
-                        AddCategory(null);
+                       this.AddCategory();
                     }
                     else AddProduct();
                     break;
@@ -40,13 +40,17 @@ namespace ToDoList
             }
         }
 
-        public void AddCategory(string ctgName)
+        public void AddCategory()
         {
             Console.WriteLine("- Please insert new category name -");
-            string categoryName = ctgName != null ? ctgName : Console.ReadLine();
-            Category newCategory = new Category() { CategoryName = categoryName };
+            string categoryName = Console.ReadLine();
+            while (String.IsNullOrEmpty(categoryName))
+            {
+                Console.WriteLine("-Category can't be empty-");
+                categoryName = Console.ReadLine();
+            }
 
-            _mainStorageCategories.Add(newCategory);
+            _mainStorageCategories.Add(categoryName);
         }
 
         public void AddProduct()
@@ -54,19 +58,21 @@ namespace ToDoList
             Console.WriteLine("- Please choose category of your product -");
 
             int index = 0;
-            foreach(var cat in _mainStorageCategories)
+            foreach(var category in _mainStorageCategories)
             {
-                Console.WriteLine($"{index+1}. {cat.CategoryName}");
+                Console.WriteLine($"{index+1}. {category}");
                 index++;
             }
             int selectedCategory = serviceHelpers.getUserSelection("- Please choose one category -");
 
-            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory-1].CategoryName);
+            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory-1]);
 
-            while (_mainStorageItems.SingleOrDefault(item => item.ItemId == newItem.ItemId) != null)
+            while (_mainStorageItems.SingleOrDefault(item => item.ItemID == newItem.ItemID) != null)
             {
                 Console.WriteLine("- You already have item with this ID -");
-                newItem.ItemId = Console.ReadLine();
+                string userInput = Console.ReadLine();
+                int newItemID = serviceHelpers.validateID(userInput);
+                newItem.ItemID = newItemID;
             }
 
             _mainStorageItems.Add(newItem);
@@ -75,8 +81,9 @@ namespace ToDoList
         public void DeleteProduct()
         {
             Console.WriteLine("Please provide the item ID to delete");
-            string itemID = Console.ReadLine();
-            var itemToDelete = _mainStorageItems.Find(item => item.ItemId == itemID);
+            string userInput = Console.ReadLine();
+            int itemID = serviceHelpers.validateID(userInput);
+            var itemToDelete = _mainStorageItems.Find(item => item.ItemID == itemID);
 
             if (itemToDelete != null)
             {
