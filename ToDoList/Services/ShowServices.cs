@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using ToDoList.Storage;
 
 namespace ToDoList.Services
@@ -19,11 +19,20 @@ namespace ToDoList.Services
 
         public void ShowAllItems()
         {
-            Console.WriteLine(String.Format(" | {0,5} | {1,5} | {2,5} | {3,5} | ", "Item ID", "Item Category", "Item Name", "Item Description"));
-            foreach(var item in _mainStorageItems)
+            string file = @"D:\apps\toDoList\items.txt";
+
+            string[] data = File.ReadAllLines(file);
+
+
+            //Console.WriteLine(String.Format(" | {0,5} | {1,5} | {2,5} | {3,5} | ", "Item ID", "Item Category", "Item Name", "Item Description"));
+
+            foreach(var item in data)
             {
                 serviceHelpers.itemRowCreator(item);
             }
+
+
+
         }
 
         public void ShowSingleItem()
@@ -40,14 +49,14 @@ namespace ToDoList.Services
                     int itemID = serviceHelpers.validateID(userInput);
                     var wantedItemByID = _mainStorageItems.Find(item => item.ItemID == itemID);
                     if(wantedItemByID == null) Console.WriteLine("-You don't have item with this ID-");
-                    else serviceHelpers.itemRowCreator(wantedItemByID);
+                   // else serviceHelpers.itemRowCreator(wantedItemByID);
                     break;
                 case "2":
                     Console.WriteLine("- Please insert items category -");
                     string itemCategory = Console.ReadLine();
                     var wantedItemByCategory = _mainStorageItems.Find(item => item.ItemCategory == itemCategory);
-                    if (wantedItemByCategory != null) serviceHelpers.itemRowCreator(wantedItemByCategory);
-                    else Console.WriteLine("You don't have item with this category");
+                   // if (wantedItemByCategory != null) serviceHelpers.itemRowCreator(wantedItemByCategory);
+                   // else Console.WriteLine("You don't have item with this category");
                     break;
             }
 
