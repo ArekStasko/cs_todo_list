@@ -11,7 +11,7 @@ namespace ToDoList
             Options optionsInitializer = new Options();
             MainStorage mainStorage = new MainStorage();
 
-            EditionServices actionServices = new EditionServices(mainStorage.items, mainStorage.categories);
+            EditionServices actionServices = new EditionServices(mainStorage);
             ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
             
             int selectedOption = 0;

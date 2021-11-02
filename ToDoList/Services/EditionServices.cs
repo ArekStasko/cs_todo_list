@@ -9,13 +9,13 @@ namespace ToDoList
     public class EditionServices
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
-        private List<Item> _mainStorageItems;
-        private List<string> _mainStorageCategories;
+        //private List<Item> _mainStorageItems;
+        //private List<string> _mainStorageCategories;
+        private MainStorage _mainStorage;
 
-        public EditionServices(List<Item> storageItems, List<string> storageCategories)
+        public EditionServices(MainStorage mainStorage)
         {
-            _mainStorageItems = storageItems;
-            _mainStorageCategories = storageCategories;
+            _mainStorage = mainStorage;
         }
 
         public void ChooseEditionMethod(int selection)
@@ -26,16 +26,16 @@ namespace ToDoList
                     this.AddCategory();
                     break;
                 case 2:
-                    if(_mainStorageCategories.Count == 0)
+                    if(_mainStorage.categories.Count == 0)
                     {
                         Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
                        this.AddCategory();
                     }
-                    else AddProduct();
+                    else AddItem();
                     break;
                 case 3:
-                    if (_mainStorageItems.Count != 0) DeleteProduct();
-                    else Console.WriteLine("Whoops, you don't have any items");
+                    if (_mainStorage.items.Count != 0) DeleteItem();
+                    else Console.WriteLine("Whoops, you don't have any item");
                     break;
             }
         }
@@ -50,24 +50,26 @@ namespace ToDoList
                 categoryName = Console.ReadLine();
             }
 
-            _mainStorageCategories.Add(categoryName);
+            _mainStorage.categories.Add(categoryName);
+            _mainStorage.categoriesEdition();
+            
         }
 
-        public void AddProduct()
+        public void AddItem()
         {
             Console.WriteLine("- Please choose category of your product -");
 
             int index = 0;
-            foreach(var category in _mainStorageCategories)
+            foreach(var category in _mainStorage.categories)
             {
                 Console.WriteLine($"{index+1}. {category}");
                 index++;
             }
             int selectedCategory = serviceHelpers.getUserSelection("- Please choose one category -");
 
-            Item newItem = serviceHelpers.createNewItem(_mainStorageCategories[selectedCategory-1]);
+            Item newItem = serviceHelpers.createNewItem(_mainStorage.categories[selectedCategory-1]);
 
-            while (_mainStorageItems.SingleOrDefault(item => item.ItemID == newItem.ItemID) != null)
+            while (_mainStorage.items.SingleOrDefault(item => item.ItemID == newItem.ItemID) != null)
             {
                 Console.WriteLine("- You already have item with this ID -");
                 string userInput = Console.ReadLine();
@@ -75,19 +77,20 @@ namespace ToDoList
                 newItem.ItemID = newItemID;
             }
 
-            _mainStorageItems.Add(newItem);
+            _mainStorage.items.Add(newItem);
+            _mainStorage.itemsEdition(newItem);
         }
 
-        public void DeleteProduct()
+        public void DeleteItem()
         {
             Console.WriteLine("Please provide the item ID to delete");
             string userInput = Console.ReadLine();
             int itemID = serviceHelpers.validateID(userInput);
-            var itemToDelete = _mainStorageItems.Find(item => item.ItemID == itemID);
+            var itemToDelete = _mainStorage.items.Find(item => item.ItemID == itemID);
 
             if (itemToDelete != null)
             {
-                _mainStorageItems.Remove(itemToDelete);
+                _mainStorage.items.Remove(itemToDelete);
                 Console.WriteLine("Successfull deleted item");
             }
             else Console.WriteLine("Sorry we couldn't find this item");
