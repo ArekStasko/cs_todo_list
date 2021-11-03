@@ -48,11 +48,17 @@ namespace ToDoList.Storage
             File.WriteAllLines(categoriesFilePath, categories);
         }
 
-        public void itemsEdition(Item newItem)
+        public void addItemToFile(Item newItem)
         {
             string[] item = new string[] { newItem.ItemID.ToString(), newItem.ItemCategory, newItem.ItemName, newItem.ItemDescription };
             string line = string.Join("|", item);
             File.AppendAllText(itemsFilePath, line + Environment.NewLine);
         } 
+
+        public void removeItemFromFile()
+        {
+            File.WriteAllText(itemsFilePath, String.Empty);
+            foreach(var item in items) this.addItemToFile(item);
+        }
     }
 }

@@ -78,7 +78,7 @@ namespace ToDoList
             }
 
             _mainStorage.items.Add(newItem);
-            _mainStorage.itemsEdition(newItem);
+            _mainStorage.addItemToFile(newItem);
         }
 
         public void DeleteItem()
@@ -91,6 +91,7 @@ namespace ToDoList
             if (itemToDelete != null)
             {
                 _mainStorage.items.Remove(itemToDelete);
+                _mainStorage.removeItemFromFile();
                 Console.WriteLine("Successfull deleted item");
             }
             else Console.WriteLine("Sorry we couldn't find this item");
