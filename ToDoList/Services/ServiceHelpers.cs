@@ -58,8 +58,27 @@ namespace ToDoList.Services
 
         public void itemRowCreator(Item item)
         {
-            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", item.ItemID, item.ItemCategory, item.ItemName, item.ItemDescription);
+            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", 
+                item.ItemID, 
+                item.ItemCategory, 
+                item.ItemName, 
+                item.ItemDescription
+                );
             Console.WriteLine(itemRow);
+        }
+
+        public void manyItemsRowCreator(List<Item> items)
+        {
+            foreach(var item in items)
+            {
+                string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", 
+                    item.ItemID, 
+                    item.ItemCategory, 
+                    item.ItemName, 
+                    item.ItemDescription
+                    );
+                Console.WriteLine(itemRow);
+            }
         }
 
 

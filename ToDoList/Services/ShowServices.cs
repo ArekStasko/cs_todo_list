@@ -49,8 +49,8 @@ namespace ToDoList.Services
                 case "2":
                     Console.WriteLine("- Please insert items category -");
                     string itemCategory = Console.ReadLine();
-                    var wantedItemByCategory = _mainStorageItems.Find(item => item.ItemCategory == itemCategory);
-                    if (wantedItemByCategory != null) serviceHelpers.itemRowCreator(wantedItemByCategory);
+                    var wantedItemByCategory = _mainStorageItems.FindAll(item => item.ItemCategory == itemCategory);
+                    if (wantedItemByCategory != null) serviceHelpers.manyItemsRowCreator(wantedItemByCategory);
                     else Console.WriteLine("You don't have item with this category");
                     break;
             }
