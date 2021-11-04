@@ -9,8 +9,6 @@ namespace ToDoList
     public class EditionServices
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
-        //private List<Item> _mainStorageItems;
-        //private List<string> _mainStorageCategories;
         private MainStorage _mainStorage;
 
         public EditionServices(MainStorage mainStorage)
@@ -28,7 +26,7 @@ namespace ToDoList
                 case 2:
                     if(_mainStorage.categories.Count == 0)
                     {
-                        Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
+                       Console.WriteLine("Whoops, you don't have any category yet, please add at least one");
                        this.AddCategory();
                     }
                     else AddItem();
@@ -36,6 +34,12 @@ namespace ToDoList
                 case 3:
                     if (_mainStorage.items.Count != 0) DeleteItem();
                     else Console.WriteLine("Whoops, you don't have any item");
+                    break;
+                case 4:
+                    if (_mainStorage.categories.Count == 0)
+                        Console.WriteLine("You don't have any category to delete");
+
+                    else deleteCategory();
                     break;
             }
         }
@@ -92,9 +96,25 @@ namespace ToDoList
             {
                 _mainStorage.items.Remove(itemToDelete);
                 _mainStorage.removeItemFromFile();
-                Console.WriteLine("Successfull deleted item");
+                Console.WriteLine("Successfully deleted item");
             }
             else Console.WriteLine("Sorry we couldn't find this item");
+        }
+
+        public void deleteCategory()
+        {
+            Console.WriteLine("Please provide the category name to delete");
+            Console.WriteLine("- This will not delete all items with this category -");
+            string userInput = Console.ReadLine();
+            var categoryToDelete = _mainStorage.categories.Find(category => category == userInput);
+            
+            if(categoryToDelete != null)
+            {
+                _mainStorage.categories.Remove(categoryToDelete);
+                _mainStorage.categoriesEdition();
+                Console.WriteLine("Successfully deleted category");
+            }
+            else Console.WriteLine("Sorry we couldn't find this category");
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ToDoList
     {
         ServiceHelpers serviceHelpers = new ServiceHelpers();
         private string[] options = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
-        private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item" };
+        private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
 
 
         public int getOptions()
