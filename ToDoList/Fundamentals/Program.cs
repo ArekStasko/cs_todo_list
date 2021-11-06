@@ -8,7 +8,7 @@ namespace ToDoList
     {
         static void Main(string[] args)
         {
-            Options optionsInitializer = new Options();
+            Options options = new Options();
             MainStorage mainStorage = new MainStorage();
 
             EditionServices actionServices = new EditionServices(mainStorage);
@@ -18,7 +18,7 @@ namespace ToDoList
 
             while (selectedOption != 4)
             {
-                selectedOption = optionsInitializer.getOptions();
+                selectedOption = options.getOptions();
                 switch (selectedOption)
                 {
                     case 1:
@@ -28,7 +28,7 @@ namespace ToDoList
                         showServices.ShowSingleItem();
                         break;
                     case 3:
-                        int userSelection = optionsInitializer.GetEditionOptions();
+                        int userSelection = options.GetEditionOptions();
                         actionServices.ChooseEditionMethod(userSelection);
                         break;
                 }

@@ -87,18 +87,42 @@ namespace ToDoList
 
         public void DeleteItem()
         {
-            Console.WriteLine("Please provide the item ID to delete");
-            string userInput = Console.ReadLine();
-            int itemID = serviceHelpers.validateID(userInput);
-            var itemToDelete = _mainStorage.items.Find(item => item.ItemID == itemID);
+            string userSelection = serviceHelpers.wantedCategoriesOrItems("delete");
+            string userInput;
 
-            if (itemToDelete != null)
+            switch (userSelection)
             {
-                _mainStorage.items.Remove(itemToDelete);
-                _mainStorage.removeItemFromFile();
-                Console.WriteLine("Successfully deleted item");
+                case "1":
+                    Console.WriteLine("- Please insert ID of item to delete -");
+                    userInput = Console.ReadLine();
+                    int itemID = serviceHelpers.validateID(userInput);
+                    var itemToDelete = _mainStorage.items.Find(item => item.ItemID == itemID);
+
+                    if (itemToDelete != null)
+                    {
+                        _mainStorage.items.Remove(itemToDelete);
+                        _mainStorage.removeItemFromFile();
+                        Console.WriteLine("Successfully deleted item");
+                    }
+                    else Console.WriteLine("Sorry we couldn't find this item");
+                    break;
+                case "2":
+                    Console.WriteLine("- Please insert category of items to delete -");
+                    userInput = Console.ReadLine();
+                    var wantedItemByCategory = _mainStorage.items.FindAll(item => item.ItemCategory == userInput);
+                    if (wantedItemByCategory != null)
+                    {
+                        foreach (var item in wantedItemByCategory)
+                        {
+                            _mainStorage.items.Remove(item);
+                            _mainStorage.removeItemFromFile();
+                            Console.WriteLine("Successfully deleted items");
+                        }
+                    }
+                    else Console.WriteLine("- You don't have any items with this category -");
+                    break;
             }
-            else Console.WriteLine("Sorry we couldn't find this item");
+            
         }
 
         public void deleteCategory()

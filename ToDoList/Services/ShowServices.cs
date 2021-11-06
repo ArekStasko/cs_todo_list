@@ -25,7 +25,7 @@ namespace ToDoList.Services
             {
                 serviceHelpers.itemRowCreator(item);
             }
-
+            
 
 
         }
@@ -34,24 +34,25 @@ namespace ToDoList.Services
         {
 
 
-            string userSelection = serviceHelpers.wantedItemFeature();
+            string userSelection = serviceHelpers.wantedCategoriesOrItems("get");
+            string userInput;
 
             switch (userSelection)
             {
                 case "1":
                     Console.WriteLine("- Please insert item ID -");
-                    string userInput = Console.ReadLine();
+                    userInput = Console.ReadLine();
                     int itemID = serviceHelpers.validateID(userInput);
                     var wantedItemByID = _mainStorageItems.Find(item => item.ItemID == itemID);
-                    if(wantedItemByID == null) Console.WriteLine("-You don't have item with this ID-");
+                    if(wantedItemByID == null) Console.WriteLine("- You don't have item with this ID -");
                     else serviceHelpers.itemRowCreator(wantedItemByID);
                     break;
                 case "2":
                     Console.WriteLine("- Please insert items category -");
-                    string itemCategory = Console.ReadLine();
-                    var wantedItemByCategory = _mainStorageItems.FindAll(item => item.ItemCategory == itemCategory);
+                    userInput = Console.ReadLine();
+                    var wantedItemByCategory = _mainStorageItems.FindAll(item => item.ItemCategory == userInput);
                     if (wantedItemByCategory != null) serviceHelpers.manyItemsRowCreator(wantedItemByCategory);
-                    else Console.WriteLine("You don't have item with this category");
+                    else Console.WriteLine("- You don't have item with this category -");
                     break;
             }
 

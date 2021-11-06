@@ -51,6 +51,7 @@ namespace ToDoList.Services
             {
                 Console.WriteLine("- Please insert number of option -");
                 userSelection = Console.ReadLine();
+                isSelectionCorrect = Int32.TryParse(userSelection, out n);
             }
 
             return Int32.Parse(userSelection);
@@ -71,23 +72,17 @@ namespace ToDoList.Services
         {
             foreach(var item in items)
             {
-                string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", 
-                    item.ItemID, 
-                    item.ItemCategory, 
-                    item.ItemName, 
-                    item.ItemDescription
-                    );
-                Console.WriteLine(itemRow);
+                this.itemRowCreator(item);
             }
         }
 
 
 
-        public string wantedItemFeature()
+        public string wantedCategoriesOrItems(string action)
         {
-            string[] itemOptions = new string[] { "Get single item from ID", "Get items with specific category" };
+            string[] itemOptions = new string[] {$"{action} single item from ID", $"{action} items with specific category" };
 
-            Console.WriteLine("You want to get single item or items of specific category ?");
+            Console.WriteLine($"You want to {action} single item or items of specific category ?");
             for (int i = 0; i < itemOptions.Length; i++) 
             {
                 Console.WriteLine($"{i + 1}. {itemOptions[i]}");
