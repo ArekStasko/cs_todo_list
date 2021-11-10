@@ -1,19 +1,22 @@
 ﻿using System;
-using ToDoList.Storage;
+using ToDoList.DataAccess;
 using ToDoList.Services;
 
 namespace ToDoList
 {
+    //ZADANIE DOMOWE
+    //1. Zrobić tak, żeby aplikacja się kompliwała
+    //2. Dopisać brakujące testy jednostokowe do projektu ToDoList.DataAccess
     public class Program
     {
         static void Main(string[] args)
         {
             Options options = new Options();
-            MainStorage mainStorage = new MainStorage();
-
-            EditionServices actionServices = new EditionServices(mainStorage);
-            ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
+            var mainStorage = new FileDataProvider();
             
+            EditionServices actionServices = new EditionServices(mainStorage);
+            /*ShowServices showServices = new ShowServices(mainStorage, mainStorage.categories);
+
             int selectedOption = 0;
 
             while (selectedOption != 4)
@@ -33,8 +36,8 @@ namespace ToDoList
                         break;
                 }
             }
-            Console.WriteLine("Goodbye !");
-            
+            Console.WriteLine("Goodbye !");*/
+
         }
     }
 }

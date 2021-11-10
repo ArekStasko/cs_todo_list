@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using ToDoList.Storage;
+using ToDoList.DataAccess.Models;
 
 namespace ToDoList.Services
 {
     public class ShowServices
     {
-        private List<Item> _mainStorageItems;
-        private List<string> _mainStorageCategories;
-        public ShowServices(List<Item> storageItems, List<string> storageCategories)
+        private List<Item> _mainStorageItems; //Tego nie powinno tu być
+        public ShowServices(List<Item> storageItems)
         {
             _mainStorageItems = storageItems;
-            _mainStorageCategories = storageCategories;
         }
 
         ServiceHelpers serviceHelpers = new ServiceHelpers();
@@ -21,11 +18,11 @@ namespace ToDoList.Services
         {
             Console.WriteLine(String.Format(" | {0,5} | {1,5} | {2,5} | {3,5} | ", "Item ID", "Item Category", "Item Name", "Item Description"));
 
-            foreach(var item in _mainStorageItems)
+            foreach (var item in _mainStorageItems)
             {
                 serviceHelpers.itemRowCreator(item);
             }
-            
+
 
 
         }
@@ -43,8 +40,8 @@ namespace ToDoList.Services
                     Console.WriteLine("- Please insert item ID -");
                     userInput = Console.ReadLine();
                     int itemID = serviceHelpers.validateID(userInput);
-                    var wantedItemByID = _mainStorageItems.Find(item => item.ItemID == itemID);
-                    if(wantedItemByID == null) Console.WriteLine("- You don't have item with this ID -");
+                    var wantedItemByID = _mainStorageItems.Find(item => item.ItemId == itemID);
+                    if (wantedItemByID == null) Console.WriteLine("- You don't have item with this ID -");
                     else serviceHelpers.itemRowCreator(wantedItemByID);
                     break;
                 case "2":

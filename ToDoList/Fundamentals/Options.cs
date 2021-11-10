@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ToDoList.Services;
 
 namespace ToDoList
@@ -14,9 +12,9 @@ namespace ToDoList
 
         public int getOptions()
         {
-            for (int i=0; i<options.Length; i++)
+            for (int i = 0; i < options.Length; i++)
             {
-                Console.WriteLine($"{i+1}. {options[i]}");
+                Console.WriteLine($"{i + 1}. {options[i]}");
             }
             return serviceHelpers.getUserSelection("- Please choose one option -");
         }

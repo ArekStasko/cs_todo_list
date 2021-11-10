@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ToDoList.Storage;
+using ToDoList.DataAccess.Models;
 
 namespace ToDoList.Services
 {
@@ -10,9 +10,9 @@ namespace ToDoList.Services
         public Item createNewItem(string category)
         {
             string[] itemQuery = new string[] { "Item Name", "Item Description", "Item ID" };
-            List<string> itemData = new List<string>(4) {"","","",""};
+            List<string> itemData = new List<string>(4) { "", "", "", "" };
 
-            for(int i=0; i<itemQuery.Length; i++)
+            for (int i = 0; i < itemQuery.Length; i++)
             {
                 Console.WriteLine($"Insert {itemQuery[i]}");
                 string providedData = Console.ReadLine();
@@ -26,16 +26,17 @@ namespace ToDoList.Services
                 itemData[i] = providedData;
             }
 
-            while(!Int32.TryParse(itemData[2], out int n))
+            while (!Int32.TryParse(itemData[2], out int n))
             {
                 Console.WriteLine("-ID of item must be number-");
                 itemData[2] = Console.ReadLine();
             }
 
-            Item newItem = new Item() {
+            var newItem = new Item()
+            {
                 ItemName = itemData[0],
                 ItemDescription = itemData[1],
-                ItemID = Int32.Parse(itemData[2]),
+                ItemId = Int32.Parse(itemData[2]),
                 ItemCategory = category
             };
 
@@ -59,10 +60,10 @@ namespace ToDoList.Services
 
         public void itemRowCreator(Item item)
         {
-            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ", 
-                item.ItemID, 
-                item.ItemCategory, 
-                item.ItemName, 
+            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
+                item.ItemId,
+                item.ItemCategory,
+                item.ItemName,
                 item.ItemDescription
                 );
             Console.WriteLine(itemRow);
@@ -70,7 +71,7 @@ namespace ToDoList.Services
 
         public void manyItemsRowCreator(List<Item> items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 this.itemRowCreator(item);
             }
@@ -80,16 +81,16 @@ namespace ToDoList.Services
 
         public string wantedCategoriesOrItems(string action)
         {
-            string[] itemOptions = new string[] {$"{action} single item from ID", $"{action} items with specific category" };
+            string[] itemOptions = new string[] { $"{action} single item from ID", $"{action} items with specific category" };
 
             Console.WriteLine($"You want to {action} single item or items of specific category ?");
-            for (int i = 0; i < itemOptions.Length; i++) 
+            for (int i = 0; i < itemOptions.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {itemOptions[i]}");
             }
 
             string userSelection = Console.ReadLine();
-            while(String.IsNullOrEmpty(userSelection) || !Int32.TryParse(userSelection, out int n))
+            while (String.IsNullOrEmpty(userSelection) || !Int32.TryParse(userSelection, out int n))
             {
                 Console.WriteLine("-Please insert correct option-");
                 userSelection = Console.ReadLine();
@@ -101,7 +102,7 @@ namespace ToDoList.Services
         public int validateID(string userInput)
         {
             string ID = userInput;
-            while(!Int32.TryParse(ID, out int n))
+            while (!Int32.TryParse(ID, out int n))
             {
                 Console.WriteLine("ID must be number");
                 ID = Console.ReadLine();
