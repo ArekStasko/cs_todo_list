@@ -8,8 +8,8 @@ namespace ToDoList.DataAccess
 {
     public class FileDataProvider : IDataProvider
     {
-        private const string categoriesFilePath = @"categories.txt";
-        private const string itemsFilePath = @"items.txt";
+        private const string categoriesFilePath = @"D:\apps\toDoList\categories.txt"; 
+        private const string itemsFilePath = @"D:\apps\toDoList\items.txt";
         private const string separator = "|";
 
         private void InitializeItemsFile()
@@ -64,13 +64,25 @@ namespace ToDoList.DataAccess
             File.AppendAllText(categoriesFilePath, newCategory + Environment.NewLine);
         }
 
+        public void RemoveCategory(string categoryToRemove)
+        {
+            InitializeCategoriesFile();
+            var categories = GetCategories().ToList();
+            categories.Remove(categoryToRemove);
+            File.WriteAllText(categoriesFilePath, string.Empty);
+            foreach (var category in categories)
+            {
+                AddCategory(category);
+            }
+        }
+
         public void AddItem(Item newItem)
         {
             InitializeItemsFile();
             string line = string.Join(separator, newItem.ConvertToDataRow());
             File.AppendAllText(itemsFilePath, line + Environment.NewLine);
         }
-        
+
         public void AddItems(List<Item> newItems)
         {
             foreach (var item in newItems)

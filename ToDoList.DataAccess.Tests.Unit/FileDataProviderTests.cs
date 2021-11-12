@@ -13,9 +13,15 @@ namespace ToDoList.DataAccess.Tests.Unit
         public void BeforeEveryTest()
         {
             var dataProvider = new FileDataProvider();
-            var allData = dataProvider.GetItems().ToList();
-            foreach (var data in allData)
-                dataProvider.RemoveItem(data);
+            var allItems = dataProvider.GetItems().ToList();
+            foreach (var item in allItems)
+                dataProvider.RemoveItem(item);
+
+            var allCategories = dataProvider.GetCategories().ToList();
+            foreach(var category in allCategories)
+            {
+                dataProvider.RemoveCategory(category);
+            }
         }
         
         [Test]
@@ -43,6 +49,18 @@ namespace ToDoList.DataAccess.Tests.Unit
             itemToAssert.ItemCategory.Should().Be(category);
             itemToAssert.ItemDescription.Should().Be(desc);
             itemToAssert.ItemName.Should().Be(itemName);
+        }
+
+        [Test]
+        public void AddCategory_Should_Work()
+        {
+            var dataProvider = new FileDataProvider();
+            var categoryName = "TestCategoryName";
+
+            dataProvider.AddCategory(categoryName);
+
+            var categoriesFromFile = dataProvider.GetCategories().ToList();
+            categoriesFromFile.Should().ContainSingle(category => category == categoryName);
         }
     }
 }
