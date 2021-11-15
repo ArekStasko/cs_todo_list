@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToDoList.DataAccess.Tests.Unit\ToDoList.DataAccess.Tests.Unit.csproj" />
     <ProjectReference Include="..\ToDoList.DataAccess\ToDoList.DataAccess.csproj" />
+    <ProjectReference Include="..\ToDoList.DataControllers\ToDoList.DataControllers.csproj" />
+    <ProjectReference Include="..\ToDoList.Views\ToDoList.Views.csproj" />
   </ItemGroup>
 
 </Project>

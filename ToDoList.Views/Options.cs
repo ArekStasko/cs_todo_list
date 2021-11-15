@@ -1,16 +1,22 @@
 ﻿using System;
-using ToDoList.Services;
 
-namespace ToDoList
+namespace ToDoList.Views
 {
     public class Options
     {
-        ServiceHelpers serviceHelpers = new ServiceHelpers();
         private string[] options = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
         private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
 
 
-        public int getOptions()
+       
+    }
+}
+
+
+/*
+ * Methods to rebuild 
+ 
+  public int getOptions()
         {
             for (int i = 0; i < options.Length; i++)
             {
@@ -18,6 +24,8 @@ namespace ToDoList
             }
             return serviceHelpers.getUserSelection("- Please choose one option -");
         }
+
+
         public int GetEditionOptions()
         {
             Console.WriteLine("- What you want to do ? -");
@@ -28,5 +36,6 @@ namespace ToDoList
             }
             return serviceHelpers.getUserSelection("- Please choose one option -");
         }
-    }
-}
+ 
+ 
+ */

@@ -1,12 +1,13 @@
 ﻿using System;
 using ToDoList.DataAccess;
-using ToDoList.Services;
+using ToDoList.Views;
 
 namespace ToDoList
 {
     //ZADANIE DOMOWE
     //1. Zrobić tak, żeby aplikacja się kompliwała
     //2. Dopisać brakujące testy jednostokowe do projektu ToDoList.DataAccess
+
     public class Program
     {
         static void Main(string[] args)
