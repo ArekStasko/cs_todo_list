@@ -58,25 +58,6 @@ namespace ToDoList.Services
             return Int32.Parse(userSelection);
         }
 
-        public void itemRowCreator(Item item)
-        {
-            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
-                item.ItemId,
-                item.ItemCategory,
-                item.ItemName,
-                item.ItemDescription
-                );
-            Console.WriteLine(itemRow);
-        }
-
-        public void manyItemsRowCreator(List<Item> items)
-        {
-            foreach (var item in items)
-            {
-                this.itemRowCreator(item);
-            }
-        }
-
 
 
         public string wantedCategoriesOrItems(string action)

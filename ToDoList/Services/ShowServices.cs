@@ -6,6 +6,11 @@ namespace ToDoList.Services
 {
     public class ShowServices
     {
+        /*
+
+        For rebuild time this have to be comment out because it causes errors
+
+
         private List<Item> _mainStorageItems; //Tego nie powinno tu być
         public ShowServices(List<Item> storageItems)
         {
@@ -54,6 +59,9 @@ namespace ToDoList.Services
             }
 
         }
+
+
+        */
 
     }
 }

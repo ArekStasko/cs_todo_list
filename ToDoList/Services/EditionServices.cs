@@ -61,9 +61,9 @@ namespace ToDoList
         public void AddItem()
         {
             Console.WriteLine("- Please choose category of your product -");
-
+            /*
             int index = 0;
-           /* foreach (var category in _dataProvider.categories)
+            foreach (var category in _dataProvider.categories)
             {
                 Console.WriteLine($"{index + 1}. {category}");
                 index++;
@@ -87,9 +87,10 @@ namespace ToDoList
         public void DeleteItem()
         {
             string userSelection = serviceHelpers.wantedCategoriesOrItems("delete");
+            /*
             string userInput;
 
-            /*switch (userSelection)
+            switch (userSelection)
             {
                 case "1":
                     Console.WriteLine("- Please insert ID of item to delete -");

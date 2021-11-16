@@ -60,10 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ToDoList.DataAccess\ToDoList.DataAccess.csproj">
-      <Project>{ad3225ff-b346-4b73-a2bd-403cb2bf9cbd}</Project>
-      <Name>ToDoList.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ToDoList.DataControllers\ToDoList.DataControllers.csproj">
       <Project>{ed3edef5-6270-4f78-a39a-adf2548a1859}</Project>
       <Name>ToDoList.DataControllers</Name>
