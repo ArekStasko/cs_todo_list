@@ -10,12 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoList.DataAccess.Tests.Uni\ToDoList.DataAccess.Tests.Unit.csproj" />
     <ProjectReference Include="..\ToDoList.DataAcces\ToDoList.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoList.DataControllers\ToDoList.DataControllers.csproj" />
     <ProjectReference Include="..\ToDoList.Views\ToDoList.Views.csproj" />
