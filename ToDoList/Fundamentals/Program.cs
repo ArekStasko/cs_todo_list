@@ -12,10 +12,10 @@ namespace ToDoList
     {
         static void Main(string[] args)
         {
-            //var mainStorage = new FileDataProvider();
+            var mainStorage = new FileDataProvider();
             //EditionServices actionServices = new EditionServices(mainStorage);
-            //var optionsProvider = new Options();
-
+            var optionsProvider = new Options();
+            optionsProvider.PrintMainOptions();
             
             
         }

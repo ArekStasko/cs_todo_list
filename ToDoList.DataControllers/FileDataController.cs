@@ -2,11 +2,21 @@
 
 namespace ToDoList.DataControllers
 {
-    public class FileDataController
+    public class FileDataController : IFileDataControllersProvider
     {
 
-        private void ChoosingEditionMethod()
+        public void ChooseMainOption()
         {
+            string selectedOption = Console.ReadLine();
+            int optionNumber;
+
+             while (!Int32.TryParse(selectedOption, out optionNumber))
+            {
+                Console.WriteLine("You have to choose the number of option");
+                selectedOption = Console.ReadLine();
+            }
+
+            
 
         }
 

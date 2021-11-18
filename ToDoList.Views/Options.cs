@@ -1,25 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
+using ToDoList.DataControllers;
 
 namespace ToDoList.Views
 {
     public class Options : IOptionsProvider
     {
-        private string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
-
-
-        public void PrintMainOptions()
+        private FileDataController dataController;
+        private void printOptions(string[] options)
         {
-        string[] options = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
-
-            for(int i = 0; i<options.Length; i++)
+            for (int i = 0; i < options.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {options[i]}");
             }
         }
 
+        public void PrintMainOptions()
+        {
+        dataController = new FileDataController();
+        string[] mainOptions = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
 
-        public void PrintShowAllItem()
+            Console.WriteLine("Please select one option :");
+            printOptions(mainOptions);
+            dataController.ChooseMainOption();
+        }
+
+        public void PrintEditionOptions()
+        {
+        string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
+
+            Console.WriteLine("Please select one edition option :");
+            printOptions(editionOptions);
+        }
+
+
+    public void PrintShowAllItem()
         {
             /*
              * For now i have to comment out it becouse i cant provide correct data type
