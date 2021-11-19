@@ -16,8 +16,8 @@ namespace ToDoList.Views
 
         public void PrintMainOptions()
         {
-        dataController = new FileDataController();
-        string[] mainOptions = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
+            dataController = new FileDataController();
+            string[] mainOptions = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
 
             Console.WriteLine("Please select one option :");
             printOptions(mainOptions);
@@ -26,34 +26,37 @@ namespace ToDoList.Views
 
         public void PrintEditionOptions()
         {
-        string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
+            string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
 
             Console.WriteLine("Please select one edition option :");
             printOptions(editionOptions);
         }
 
 
-    public void PrintShowAllItem()
-        {
-            /*
-             * For now i have to comment out it becouse i cant provide correct data type
-             
-               string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
-               item.ItemId,
-               item.ItemCategory,
-               item.ItemName,
-               item.ItemDescription
-               );
-                Console.WriteLine(itemRow);
-            */
-        }
+
     }
-       
 }
 
 
-/*
- * Methods to rebuild 
+    /*
+     * Methods to rebuild 
+
+          public void PrintShowAllItem()
+            {
+
+               
+
+                   string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
+                   item.ItemId,
+                   item.ItemCategory,
+                   item.ItemName,
+                   item.ItemDescription
+                   );
+                    Console.WriteLine(itemRow);
+
+}
+    }
+
  
   public int getOptions()
         {

@@ -6,7 +6,8 @@ namespace ToDoList.Views
     {
 
         void PrintMainOptions();
-        void PrintShowAllItem();
+
+        void PrintEditionOptions();
 
     }
 }
