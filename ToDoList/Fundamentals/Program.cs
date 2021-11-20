@@ -1,6 +1,5 @@
 ﻿using System;
-using ToDoList.DataAccess;
-using ToDoList.Views;
+using ToDoList.DataControllers;
 
 namespace ToDoList
 {
@@ -12,11 +11,8 @@ namespace ToDoList
     {
         static void Main(string[] args)
         {
-            var mainStorage = new FileDataProvider();
-            //EditionServices actionServices = new EditionServices(mainStorage);
-            var optionsProvider = new Options();
-            optionsProvider.PrintMainOptions();
-            
+            var dataController = new FileDataController();
+            dataController.ChooseMainOption();
             
         }
     }

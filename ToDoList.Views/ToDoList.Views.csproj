@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoList.DataControllers\ToDoList.DataControllers.csproj" />
+    <ProjectReference Include="..\ToDoList.DataAcces\ToDoList.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

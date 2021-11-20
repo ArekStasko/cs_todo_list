@@ -1,11 +1,10 @@
 ﻿using System;
-using ToDoList.DataControllers;
+using ToDoList.DataAccess.Models;
 
 namespace ToDoList.Views
 {
     public class Options : IOptionsProvider
     {
-        private FileDataController dataController;
         private void printOptions(string[] options)
         {
             for (int i = 0; i < options.Length; i++)
@@ -16,12 +15,10 @@ namespace ToDoList.Views
 
         public void PrintMainOptions()
         {
-            dataController = new FileDataController();
             string[] mainOptions = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
 
             Console.WriteLine("Please select one option :");
             printOptions(mainOptions);
-            dataController.ChooseMainOption();
         }
 
         public void PrintEditionOptions()
@@ -33,6 +30,16 @@ namespace ToDoList.Views
         }
 
 
+        public void PrintItem(Item item)
+        {
+            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
+            item.ItemId,
+            item.ItemCategory,
+            item.ItemName,
+            item.ItemDescription
+            );
+            Console.WriteLine(itemRow);
+        }
 
     }
 }

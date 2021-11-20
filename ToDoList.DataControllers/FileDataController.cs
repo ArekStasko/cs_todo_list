@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using ToDoList.Views;
+using ToDoList.DataAccess;
+using ToDoList.DataAccess.Models;
 
 namespace ToDoList.DataControllers
 {
-    public class FileDataController :  IFileDataControllersProvider
+    public class FileDataController : Options, IFileDataControllersProvider
     {
+        private FileDataProvider dataProvider;
+
 
         private int GetUserSelection()
         {
@@ -19,13 +25,23 @@ namespace ToDoList.DataControllers
             return optionNumber;
         }
 
+
+
         public void ChooseMainOption()
         {
+            base.PrintMainOptions();
             int userSelection = GetUserSelection();
+            dataProvider = new FileDataProvider();
 
             if (userSelection == 1)
             {
-                Console.WriteLine("show all items method call");
+                IEnumerable<Item> items = dataProvider.GetItems();
+
+                foreach(var item in items)
+                {
+                    base.PrintItem(item);
+                }
+                
             }
             else if (userSelection == 2)
             {
@@ -33,12 +49,15 @@ namespace ToDoList.DataControllers
             }
             else if (userSelection == 3)
             {
+                base.PrintEditionOptions();
+                int selectedEditionOption = GetUserSelection();
 
-                Console.WriteLine("Print edition options method");
+                FileEditionController editionController = new FileEditionController(dataProvider);
+                editionController.GetSelectedEditionOption(selectedEditionOption);
             }
             else if (userSelection == 4)
             {
-                Console.WriteLine("Close app");
+                Console.WriteLine("Goodbye ! :D");
             }
             else
             {
