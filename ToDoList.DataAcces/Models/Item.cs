@@ -1,4 +1,6 @@
-﻿namespace ToDoList.DataAccess.Models
+﻿using System.Collections.Generic;
+
+namespace ToDoList.DataAccess.Models
 {
     public class Item
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ToDoList.DataAccess.Models;
 
 namespace ToDoList.Views
@@ -39,6 +40,16 @@ namespace ToDoList.Views
             item.ItemDescription
             );
             Console.WriteLine(itemRow);
+        }
+
+        public void PrintCategories(IEnumerable<string> categories)
+        {
+            int index = 0;
+            foreach (var category in categories)
+            {
+                Console.WriteLine($"{index + 1}. {category}");
+                index++;
+            }
         }
 
     }

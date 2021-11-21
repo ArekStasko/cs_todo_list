@@ -1,16 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ToDoList.DataAccess;
+using ToDoList.DataAccess.Models;
 
 namespace ToDoList.DataControllers
 {
-    public class FileEditionController
+    public class FileEditionController : FileDataController
     {
         private FileDataProvider dataProvider;
 
         public FileEditionController(FileDataProvider dataProvider)
         {
             this.dataProvider = dataProvider;
+        }
+
+        private int GetID()
+        {
+            Console.WriteLine("Provide item ID number");
+            string ID = Console.ReadLine();
+            while (!Int32.TryParse(ID, out int n))
+            {
+                Console.WriteLine("ID must be number");
+                ID = Console.ReadLine();
+            }
+            return Int32.Parse(ID);
+        }
+
+        private string GetCategory()
+        {
+            Console.WriteLine("- Please choose number of your item category -");
+            IEnumerable<string> categories = dataProvider.GetCategories();
+
+            base.PrintCategories(categories);
+            string category = Console.ReadLine();
+            int categoryNumber;
+
+            while (!Int32.TryParse(category, out categoryNumber)) 
+            {
+                Console.WriteLine("- Please provide number of category -");
+                category = Console.ReadLine();
+            };
+
+            return categories.ElementAt(categoryNumber);
         }
 
         private void AddNewCategory()
@@ -28,34 +60,43 @@ namespace ToDoList.DataControllers
 
         private void AddNewItem()
         {
-            Console.WriteLine("- Please choose category of your product -");
+            IEnumerable<Item> items = dataProvider.GetItems();
+            string[] itemQuery = new string[] { "Item Name", "Item Description" };
+            List<string> itemData = new List<string>(2) { "", "" };
 
-            IEnumerable<string> categories = dataProvider.GetCategories();
-       
-
-            int index = 0;
-            foreach (var category in categories)
+            for (int i = 0; i < itemQuery.Length; i++)
             {
-                Console.WriteLine($"{index + 1}. {category}");
-                index++;
+                Console.WriteLine($"Insert {itemQuery[i]}");
+                string providedData = Console.ReadLine();
+
+                while (String.IsNullOrEmpty(providedData))
+                {
+                    Console.WriteLine("-You can't add empty data-");
+                    providedData = Console.ReadLine();
+                }
+
+                itemData[i] = providedData;
             }
 
+            string category = GetCategory();
+            int itemID = GetID();
 
-            /*
-             
+            var newItem = new Item()
+            {
+                ItemName = itemData[0],
+                ItemDescription = itemData[1],
+                ItemId = itemID,
+                ItemCategory = category
+            };
 
-            Item newItem = serviceHelpers.createNewItem(_dataProvider.categories[selectedCategory - 1]);
-
-            while (_dataProvider.items.SingleOrDefault(item => item.ItemID == newItem.ItemId) != null)
+            while (items.SingleOrDefault(item => item.ItemId == newItem.ItemId) != null)
             {
                 Console.WriteLine("- You already have item with this ID -");
-                string userInput = Console.ReadLine();
-                int newItemID = serviceHelpers.validateID(userInput);
+                int newItemID = GetID();
                 newItem.ItemId = newItemID;
             }
 
-            _dataProvider.items.Add(newItem);
-            _dataProvider.addItemToFile(newItem);*/
+            dataProvider.AddItem(newItem);
         }
 
         public void GetSelectedEditionOption(int selectedOption)

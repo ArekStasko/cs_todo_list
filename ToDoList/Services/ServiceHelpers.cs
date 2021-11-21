@@ -7,58 +7,6 @@ namespace ToDoList.Services
     public class ServiceHelpers
     {
 
-        public Item createNewItem(string category)
-        {
-            string[] itemQuery = new string[] { "Item Name", "Item Description", "Item ID" };
-            List<string> itemData = new List<string>(4) { "", "", "", "" };
-
-            for (int i = 0; i < itemQuery.Length; i++)
-            {
-                Console.WriteLine($"Insert {itemQuery[i]}");
-                string providedData = Console.ReadLine();
-
-                while (String.IsNullOrEmpty(providedData))
-                {
-                    Console.WriteLine("-You can't add empty data-");
-                    providedData = Console.ReadLine();
-                }
-
-                itemData[i] = providedData;
-            }
-
-            while (!Int32.TryParse(itemData[2], out int n))
-            {
-                Console.WriteLine("-ID of item must be number-");
-                itemData[2] = Console.ReadLine();
-            }
-
-            var newItem = new Item()
-            {
-                ItemName = itemData[0],
-                ItemDescription = itemData[1],
-                ItemId = Int32.Parse(itemData[2]),
-                ItemCategory = category
-            };
-
-            return newItem;
-        }
-
-        public int getUserSelection(string message)
-        {
-            Console.WriteLine($"{message}");
-            string userSelection = Console.ReadLine();
-            bool isSelectionCorrect = Int32.TryParse(userSelection, out int n);
-            while (!isSelectionCorrect)
-            {
-                Console.WriteLine("- Please insert number of option -");
-                userSelection = Console.ReadLine();
-                isSelectionCorrect = Int32.TryParse(userSelection, out n);
-            }
-
-            return Int32.Parse(userSelection);
-        }
-
-
 
         public string wantedCategoriesOrItems(string action)
         {
@@ -80,15 +28,6 @@ namespace ToDoList.Services
             return userSelection;
         }
 
-        public int validateID(string userInput)
-        {
-            string ID = userInput;
-            while (!Int32.TryParse(ID, out int n))
-            {
-                Console.WriteLine("ID must be number");
-                ID = Console.ReadLine();
-            }
-            return Int32.Parse(ID);
-        }
+
     }
 }
