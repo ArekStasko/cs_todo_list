@@ -16,7 +16,12 @@ namespace ToDoList.Views
 
         public void PrintMainOptions()
         {
-            string[] mainOptions = new string[] { "Show all items", "Show specific item", "Edit items", "Close ToDo list" };
+            string[] mainOptions = new string[] { 
+                "Show all items", 
+                "Show specific item", 
+                "Edit items", 
+                "Close ToDo list" 
+            };
 
             Console.WriteLine("Please select one option :");
             printOptions(mainOptions);
@@ -24,12 +29,27 @@ namespace ToDoList.Views
 
         public void PrintEditionOptions()
         {
-            string[] editionOptions = new string[] { "Add new Category", "Add new item", "Delete item", "Delete category" };
+            string[] editionOptions = new string[] { 
+                "Add new Category", 
+                "Add new item", 
+                "Delete item", 
+                "Delete category" 
+            };
 
             Console.WriteLine("Please select one edition option :");
             printOptions(editionOptions);
         }
 
+        public void PrintItemSearchOptions()
+        {
+            string[] itemOptions = new string[] { 
+                "Get single item from ID", 
+                "Get items with specific category" 
+            };
+
+            Console.WriteLine("Please select one item search option :");
+            printOptions(itemOptions);
+        }
 
         public void PrintItem(Item item)
         {
@@ -54,48 +74,3 @@ namespace ToDoList.Views
 
     }
 }
-
-
-    /*
-     * Methods to rebuild 
-
-          public void PrintShowAllItem()
-            {
-
-               
-
-                   string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
-                   item.ItemId,
-                   item.ItemCategory,
-                   item.ItemName,
-                   item.ItemDescription
-                   );
-                    Console.WriteLine(itemRow);
-
-}
-    }
-
- 
-  public int getOptions()
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}. {options[i]}");
-            }
-            return serviceHelpers.getUserSelection("- Please choose one option -");
-        }
-
-
-        public int GetEditionOptions()
-        {
-            Console.WriteLine("- What you want to do ? -");
-
-            for (int i = 0; i < editionOptions.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}. {editionOptions[i]}");
-            }
-            return serviceHelpers.getUserSelection("- Please choose one option -");
-        }
- 
- 
- */

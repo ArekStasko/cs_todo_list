@@ -17,17 +17,6 @@ namespace ToDoList.DataControllers
             this.categories = dataProvider.GetCategories();
         }
 
-        private int GetID(string message)
-        {
-            Console.WriteLine(message);
-            string ID = Console.ReadLine();
-            while (!Int32.TryParse(ID, out int n))
-            {
-                Console.WriteLine("ID must be number");
-                ID = Console.ReadLine();
-            }
-            return Int32.Parse(ID);
-        }
 
         private string GetCategory()
         {
@@ -80,7 +69,7 @@ namespace ToDoList.DataControllers
             }
 
             string category = GetCategory();
-            int itemID = GetID("Provide new item ID");
+            int itemID = base.GetID("Provide new item ID");
 
             var newItem = new Item()
             {
@@ -93,47 +82,33 @@ namespace ToDoList.DataControllers
             while (items.SingleOrDefault(item => item.ItemId == newItem.ItemId) != null)
             {
                 Console.WriteLine("- You already have item with this ID -");
-                int newItemID = GetID("- Provide unique ID number -");
+                int newItemID = base.GetID("- Provide unique ID number -");
                 newItem.ItemId = newItemID;
             }
 
             dataProvider.AddItem(newItem);
         }
 
-        private void DeleteItem(int IdOfItemToDelete)
+        private void DeleteItem()
         {
-            IEnumerable<Item> items = dataProvider.GetItems();
-            var itemToDelete = items.Single(item => item.ItemId == IdOfItemToDelete);
-
-            if (itemToDelete != null)
-            {
-                dataProvider.RemoveItem(itemToDelete);
-            }
+            Item itemToDelete = base.GetItemByID("Provide ID of item to delete");
+            dataProvider.RemoveItem(itemToDelete);
         }
 
         private void DeleteCategory()
         {
-            IEnumerable<Item> items = dataProvider.GetItems();
-
             Console.WriteLine("Please provide the category name to delete");
             Console.WriteLine("- This will delete all items with this category -");
-            string userInput = Console.ReadLine();
-            var IsCategory = categories.Where(category => category == userInput);
 
-            string categoryToDelete = IsCategory.ToString();
+            IEnumerable<Item> ItemsToDelete = base.GetItemsByCategory();
+            string categoryToDelete = ItemsToDelete.First().ItemCategory;
 
-            if (IsCategory != null)
+            foreach (var item in ItemsToDelete)
             {
-                var ItemsToDelete = items.Where(item => item.ItemCategory == categoryToDelete);
-                foreach(var item in ItemsToDelete)
-                {
-                    DeleteItem(item.ItemId);
-                }
-
-                dataProvider.RemoveCategory(categoryToDelete);
-                Console.WriteLine("Successfully deleted category");
+                dataProvider.RemoveItem(item);
             }
-            else Console.WriteLine("Sorry we couldn't find this category");
+
+            dataProvider.RemoveCategory(categoryToDelete);
         }
 
         public void GetSelectedEditionOption(int selectedOption)
@@ -148,8 +123,7 @@ namespace ToDoList.DataControllers
             }
             else if (selectedOption == 3)
             {
-                int IdOfItemToDelete = GetID("- Please insert ID of item to delete -");
-                DeleteItem(IdOfItemToDelete);
+                DeleteItem();
             }
             else if (selectedOption == 4)
             {

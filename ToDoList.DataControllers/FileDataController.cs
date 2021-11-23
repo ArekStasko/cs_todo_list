@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ToDoList.Views;
+using System.Linq;
 using ToDoList.DataAccess;
 using ToDoList.DataAccess.Models;
+using ToDoList.Views;
 
 namespace ToDoList.DataControllers
 {
@@ -25,6 +26,52 @@ namespace ToDoList.DataControllers
             return optionNumber;
         }
 
+        protected int GetID(string message)
+        {
+            Console.WriteLine(message);
+            string ID = Console.ReadLine();
+            while (!Int32.TryParse(ID, out int n))
+            {
+                Console.WriteLine("ID must be number");
+                ID = Console.ReadLine();
+            }
+            return Int32.Parse(ID);
+        }
+
+        protected Item GetItemByID(string msg)
+        {
+            IEnumerable<Item> items = dataProvider.GetItems();
+
+            int itemID = GetID(msg);
+
+            var item = items.Single(item => item.ItemId == itemID);
+
+            if (item != null)
+            {
+                return item;
+            }
+            else
+                throw new Exception("No item found with this ID");
+        }
+
+
+        protected IEnumerable<Item> GetItemsByCategory()
+        {
+            IEnumerable<string> categories = dataProvider.GetCategories();
+            IEnumerable<Item> items = dataProvider.GetItems();
+
+            string userInput = Console.ReadLine();
+            var IsCategory = categories.Where(category => category == userInput);
+
+            string category = IsCategory.ToString();
+
+            if (IsCategory != null)
+            {
+                return items.Where(item => item.ItemCategory == category); ;
+            }
+            else
+                throw new Exception("We couldn't find this category items");
+        }
 
 
         public void ChooseMainOption()
@@ -33,19 +80,36 @@ namespace ToDoList.DataControllers
             int userSelection = GetUserSelection();
             dataProvider = new FileDataProvider();
 
+
             if (userSelection == 1)
             {
                 IEnumerable<Item> items = dataProvider.GetItems();
 
-                foreach(var item in items)
+                foreach (var item in items)
                 {
                     base.PrintItem(item);
                 }
-                
+
             }
             else if (userSelection == 2)
             {
-                Console.WriteLine("Call method for choosing which specification user want to use id or category");
+                base.PrintItemSearchOptions();
+                int selectedSearchItemOption = GetUserSelection();
+
+                if (selectedSearchItemOption == 1)
+                {
+                    Item searchedItem = GetItemByID("Provide item ID to find");
+                    base.PrintItem(searchedItem);
+                }
+                else if (selectedSearchItemOption == 2)
+                {
+                    IEnumerable<Item> searchedItems = GetItemsByCategory();
+                    foreach (var item in searchedItems)
+                    {
+                        base.PrintItem(item);
+                    }
+                }
+
             }
             else if (userSelection == 3)
             {
@@ -63,9 +127,6 @@ namespace ToDoList.DataControllers
             {
                 Console.WriteLine("You provide wrong option number");
             }
-
-
         }
-
     }
 }
