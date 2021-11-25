@@ -9,7 +9,7 @@ namespace ToDoList.DataControllers
 {
     public class FileDataController : Options, IFileDataControllersProvider
     {
-        private FileDataProvider dataProvider;
+        private FileDataProvider dataProvider = new FileDataProvider();
 
 
         private int GetUserSelection()
@@ -60,14 +60,12 @@ namespace ToDoList.DataControllers
             IEnumerable<string> categories = dataProvider.GetCategories();
             IEnumerable<Item> items = dataProvider.GetItems();
 
+            Console.WriteLine("Provide items category to find");
             string userInput = Console.ReadLine();
-            var IsCategory = categories.Where(category => category == userInput);
 
-            string category = IsCategory.ToString();
-
-            if (IsCategory != null)
+            if (categories.Contains(userInput))
             {
-                return items.Where(item => item.ItemCategory == category); ;
+                return items.Where(item => item.ItemCategory == userInput); ;
             }
             else
                 throw new Exception("We couldn't find this category items");
@@ -78,7 +76,6 @@ namespace ToDoList.DataControllers
         {
             base.PrintMainOptions();
             int userSelection = GetUserSelection();
-            dataProvider = new FileDataProvider();
 
 
             if (userSelection == 1)

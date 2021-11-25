@@ -32,7 +32,7 @@ namespace ToDoList.DataControllers
                 category = Console.ReadLine();
             };
 
-            return categories.ElementAt(categoryNumber);
+            return categories.ElementAt(categoryNumber-1);
         }
 
         private void AddNewCategory()
@@ -82,7 +82,7 @@ namespace ToDoList.DataControllers
             while (items.SingleOrDefault(item => item.ItemId == newItem.ItemId) != null)
             {
                 Console.WriteLine("- You already have item with this ID -");
-                int newItemID = base.GetID("- Provide unique ID number -");
+                int newItemID = GetID("- Provide unique ID number -");
                 newItem.ItemId = newItemID;
             }
 
@@ -91,7 +91,7 @@ namespace ToDoList.DataControllers
 
         private void DeleteItem()
         {
-            Item itemToDelete = base.GetItemByID("Provide ID of item to delete");
+            Item itemToDelete = GetItemByID("Provide ID of item to delete");
             dataProvider.RemoveItem(itemToDelete);
         }
 
@@ -100,7 +100,7 @@ namespace ToDoList.DataControllers
             Console.WriteLine("Please provide the category name to delete");
             Console.WriteLine("- This will delete all items with this category -");
 
-            IEnumerable<Item> ItemsToDelete = base.GetItemsByCategory();
+            IEnumerable<Item> ItemsToDelete = GetItemsByCategory();
             string categoryToDelete = ItemsToDelete.First().ItemCategory;
 
             foreach (var item in ItemsToDelete)
