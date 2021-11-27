@@ -11,7 +11,6 @@ namespace ToDoList.DataControllers
     {
         private FileDataProvider dataProvider = new FileDataProvider();
 
-
         private int GetUserSelection()
         {
             string selectedOption = Console.ReadLine();
@@ -58,11 +57,13 @@ namespace ToDoList.DataControllers
         protected IEnumerable<Item> GetItemsByCategory(string category)
         {
             IEnumerable<string> categories = dataProvider.GetCategories();
+            Console.WriteLine("GET ITEMS");
             IEnumerable<Item> items = dataProvider.GetItems();
-
+            Console.WriteLine("GET CATEGORIES");
             if (categories.Contains(category))
             {
-                return items.Where(item => item.ItemCategory == category); ;
+                Console.WriteLine("LOOK FOR ITEMS");
+                return items.Where(item => item.ItemCategory == category);
             }
             else
             {

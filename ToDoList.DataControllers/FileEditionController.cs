@@ -69,7 +69,13 @@ namespace ToDoList.DataControllers
             }
 
             string category = GetCategory();
-            int itemID = base.GetID("Provide new item ID");
+            int itemID = GetID("Provide new item ID");
+
+            if(items.Any(item=>item.ItemId == itemID))
+            {
+                Console.WriteLine("You already have item with this ID");
+                itemID = GetID("Provide new item unique ID");
+            }
 
             var newItem = new Item()
             {
@@ -104,10 +110,7 @@ namespace ToDoList.DataControllers
             IEnumerable<Item> ItemsToDelete = GetItemsByCategory(userInput);
             if (ItemsToDelete.Any())
             {
-                foreach (var item in ItemsToDelete)
-                {
-                    dataProvider.RemoveItem(item);
-                }
+                dataProvider.RemoveItems(ItemsToDelete.ToList());
             }
             dataProvider.RemoveCategory(userInput);
         }           

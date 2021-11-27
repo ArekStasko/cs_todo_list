@@ -58,7 +58,7 @@ namespace ToDoList.DataAccess
         {
             InitializeCategoriesFile();
             foreach (string line in File.ReadLines(categoriesFilePath))
-                if (String.IsNullOrWhiteSpace(line))
+                if (!String.IsNullOrWhiteSpace(line))
                 {
                     yield return line;
                 }
@@ -102,6 +102,12 @@ namespace ToDoList.DataAccess
             items.Remove(itemToRemove);
             File.WriteAllText(itemsFilePath, string.Empty);
             AddItems(items);
+        }
+
+        public void RemoveItems(List<Item> newItems)
+        {
+            foreach (var item in newItems)
+                RemoveItem(item);
         }
 
     }

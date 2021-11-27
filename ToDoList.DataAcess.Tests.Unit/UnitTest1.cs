@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using FluentAssertions;
+using System.Collections.Generic;
 using System.Linq;
 using ToDoList.DataAccess.Models;
 
@@ -100,6 +101,35 @@ namespace ToDoList.DataAccess.Tests.Unit
 
             var categoriesFromFile = dataProvider.GetCategories().ToList();
             categoriesFromFile.Should().NotContain(categoryName);
+        }
+
+        [Test]
+        public void RemoveItems_ShouldRemove_manyItems()
+        {
+            var dataProvider = new FileDataProvider();
+            List<string> testItemNames = new List<string>() { "testName1", "testName2", "testName3", "testName4" };
+            List<string> testItemDesc = new List<string>() { "testDesc1", "testDesc2", "testDesc3", "testDesc4" };
+            List<string> testItemCategories = new List<string>() { "testCategory", "testCategory", "testCategory", "testCategory" };
+            List<int> testIDs = new List<int>() { 123, 456, 789, 321 };
+
+            for (int i = 0; i < testItemNames.Count; i++)
+            {
+                var newItem = new Item()
+                {
+                    ItemName = testItemNames[i],
+                    ItemDescription = testItemDesc[i],
+                    ItemCategory = testItemCategories[i],
+                    ItemId = testIDs[i],
+                };
+
+                dataProvider.AddItem(newItem);
+            }
+
+            var itemsToFind = dataProvider.GetItems().Where(item => item.ItemCategory == "testCategory");
+
+            dataProvider.RemoveItems(itemsToFind.ToList());
+            var itemsFromFile = dataProvider.GetItems().ToList();
+            itemsFromFile.Should().BeEmpty();
         }
     }
 }
