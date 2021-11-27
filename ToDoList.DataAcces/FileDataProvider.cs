@@ -39,15 +39,18 @@ namespace ToDoList.DataAccess
             InitializeItemsFile();
             foreach (string line in File.ReadLines(itemsFilePath))
             {
-                string[] data = line.Split(separator.ToCharArray());
-                var newItem = new Item()
+                if (!String.IsNullOrWhiteSpace(line))
                 {
-                    ItemId = Int32.Parse(data[0]),
-                    ItemCategory = data[1],
-                    ItemName = data[2],
-                    ItemDescription = data[3],
-                };
-                yield return newItem;
+                    string[] data = line.Split(separator.ToCharArray());
+                    var newItem = new Item()
+                    {
+                        ItemId = Int32.Parse(data[0]),
+                        ItemCategory = data[1],
+                        ItemName = data[2],
+                        ItemDescription = data[3],
+                    };
+                    yield return newItem;
+                }
             }
         }
 
@@ -55,7 +58,10 @@ namespace ToDoList.DataAccess
         {
             InitializeCategoriesFile();
             foreach (string line in File.ReadLines(categoriesFilePath))
-                yield return line;
+                if (String.IsNullOrWhiteSpace(line))
+                {
+                    yield return line;
+                }
         }
 
         public void AddCategory(string newCategory)

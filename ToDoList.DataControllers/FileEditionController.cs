@@ -99,17 +99,19 @@ namespace ToDoList.DataControllers
         {
             Console.WriteLine("Please provide the category name to delete");
             Console.WriteLine("- This will delete all items with this category -");
+            string userInput = Console.ReadLine();
 
-            IEnumerable<Item> ItemsToDelete = GetItemsByCategory();
-            string categoryToDelete = ItemsToDelete.First().ItemCategory;
-
-            foreach (var item in ItemsToDelete)
+            IEnumerable<Item> ItemsToDelete = GetItemsByCategory(userInput);
+            if (ItemsToDelete.Any())
             {
-                dataProvider.RemoveItem(item);
+                foreach (var item in ItemsToDelete)
+                {
+                    dataProvider.RemoveItem(item);
+                }
             }
-
-            dataProvider.RemoveCategory(categoryToDelete);
-        }
+            dataProvider.RemoveCategory(userInput);
+        }           
+        
 
         public void GetSelectedEditionOption(int selectedOption)
         {

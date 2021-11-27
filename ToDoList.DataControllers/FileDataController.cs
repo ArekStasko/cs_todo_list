@@ -55,20 +55,19 @@ namespace ToDoList.DataControllers
         }
 
 
-        protected IEnumerable<Item> GetItemsByCategory()
+        protected IEnumerable<Item> GetItemsByCategory(string category)
         {
             IEnumerable<string> categories = dataProvider.GetCategories();
             IEnumerable<Item> items = dataProvider.GetItems();
 
-            Console.WriteLine("Provide items category to find");
-            string userInput = Console.ReadLine();
-
-            if (categories.Contains(userInput))
+            if (categories.Contains(category))
             {
-                return items.Where(item => item.ItemCategory == userInput); ;
+                return items.Where(item => item.ItemCategory == category); ;
             }
             else
-                throw new Exception("We couldn't find this category items");
+            {
+                throw new Exception($"You don't have {category} category");
+            }
         }
 
 
@@ -100,7 +99,11 @@ namespace ToDoList.DataControllers
                 }
                 else if (selectedSearchItemOption == 2)
                 {
-                    IEnumerable<Item> searchedItems = GetItemsByCategory();
+
+                    Console.WriteLine("Provide items category to find");
+                    string userInput = Console.ReadLine();
+
+                    IEnumerable<Item> searchedItems = GetItemsByCategory(userInput);
                     foreach (var item in searchedItems)
                     {
                         base.PrintItem(item);
