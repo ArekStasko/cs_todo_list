@@ -43,29 +43,28 @@ namespace ToDoList.DataControllers
 
             int itemID = GetID(msg);
 
-            var item = items.Single(item => item.ItemId == itemID);
-
-            if (item != null)
+            try
             {
+                var item = items.Single(item => item.ItemId == itemID);
                 return item;
             }
-            else
-                throw new Exception("No item found with this ID");
+            catch(Exception)
+            {
+                throw new Exception($"You don't have item with {itemID} ID");
+            }
+
         }
 
 
         protected IEnumerable<Item> GetItemsByCategory(string category)
         {
             IEnumerable<string> categories = dataProvider.GetCategories();
-            Console.WriteLine("GET ITEMS");
             IEnumerable<Item> items = dataProvider.GetItems();
-            Console.WriteLine("GET CATEGORIES");
-            if (categories.Contains(category))
+            try
             {
-                Console.WriteLine("LOOK FOR ITEMS");
                 return items.Where(item => item.ItemCategory == category);
             }
-            else
+            catch(Exception)
             {
                 throw new Exception($"You don't have {category} category");
             }

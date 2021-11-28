@@ -10,11 +10,13 @@ namespace ToDoList.DataControllers
     {
         private FileDataProvider dataProvider;
         private IEnumerable<string> categories;
+        private IEnumerable<Item> items;
 
         public FileEditionController(FileDataProvider dataProvider)
         {
             this.dataProvider = dataProvider;
-            this.categories = dataProvider.GetCategories();
+            categories = dataProvider.GetCategories();
+            items = dataProvider.GetItems();
         }
 
 
@@ -50,7 +52,6 @@ namespace ToDoList.DataControllers
 
         private void AddNewItem()
         {
-            IEnumerable<Item> items = dataProvider.GetItems();
             string[] itemQuery = new string[] { "Item Name", "Item Description" };
             List<string> itemData = new List<string>(2) { "", "" };
 
@@ -124,15 +125,36 @@ namespace ToDoList.DataControllers
             }
             else if (selectedOption == 2)
             {
-                AddNewItem();
+                if (!categories.Any())
+                {
+                    Console.WriteLine("Please first add at least one category");
+                }
+                else
+                {
+                    AddNewItem();
+                }
             }
             else if (selectedOption == 3)
             {
-                DeleteItem();
+                if (!items.Any())
+                {
+                    Console.WriteLine("You don't have any items");
+                }
+                else
+                {
+                    DeleteItem();
+                }
             }
             else if (selectedOption == 4)
             {
-                DeleteCategory();
+                if (!categories.Any())
+                {
+                    Console.WriteLine("You don't have any category");
+                }
+                else
+                {
+                    DeleteCategory();
+                }
             }
             else
             {
