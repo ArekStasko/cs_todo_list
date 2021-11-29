@@ -128,6 +128,7 @@ namespace ToDoList.DataControllers
                 if (!categories.Any())
                 {
                     Console.WriteLine("Please first add at least one category");
+                    AddNewCategory();
                 }
                 else
                 {

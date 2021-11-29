@@ -122,6 +122,7 @@ namespace ToDoList.DataControllers
             else if (userSelection == 4)
             {
                 Console.WriteLine("Goodbye ! :D");
+                Environment.Exit(0);
             }
             else
             {

@@ -6,8 +6,9 @@ namespace ToDoList.Views
 {
     public class Options : IOptionsProvider
     {
-        private void printOptions(string[] options)
+        private void printOptions(string[] options, string msg)
         {
+            Console.WriteLine(msg);
             for (int i = 0; i < options.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {options[i]}");
@@ -23,8 +24,8 @@ namespace ToDoList.Views
                 "Close ToDo list" 
             };
 
-            Console.WriteLine("Please select one option :");
-            printOptions(mainOptions);
+            string msg = "Please select one option :";
+            printOptions(mainOptions, msg);
         }
 
         public void PrintEditionOptions()
@@ -36,8 +37,8 @@ namespace ToDoList.Views
                 "Delete category" 
             };
 
-            Console.WriteLine("Please select one edition option :");
-            printOptions(editionOptions);
+            string msg = "Please select one edition option :";
+            printOptions(editionOptions, msg);
         }
 
         public void PrintItemSearchOptions()
@@ -47,8 +48,8 @@ namespace ToDoList.Views
                 "Get items with specific category" 
             };
 
-            Console.WriteLine("Please select one item search option :");
-            printOptions(itemOptions);
+            string msg = "Please select one item search option :";
+            printOptions(itemOptions, msg);
         }
 
         public void PrintItem(Item item)
