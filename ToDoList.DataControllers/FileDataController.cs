@@ -7,7 +7,7 @@ using ToDoList.Views;
 
 namespace ToDoList.DataControllers
 {
-    public class FileDataController : Options, IFileDataControllersProvider
+    public class FileDataController : Options, IFileDataController
     {
         private FileDataProvider dataProvider = new FileDataProvider();
 
@@ -21,7 +21,7 @@ namespace ToDoList.DataControllers
                 Console.WriteLine("You have to choose the number of option");
                 selectedOption = Console.ReadLine();
             }
-
+            Console.Clear();
             return optionNumber;
         }
 
@@ -46,6 +46,7 @@ namespace ToDoList.DataControllers
             try
             {
                 var item = items.Single(item => item.ItemId == itemID);
+                Console.Clear();
                 return item;
             }
             catch(Exception)
@@ -62,6 +63,7 @@ namespace ToDoList.DataControllers
             IEnumerable<Item> items = dataProvider.GetItems();
             try
             {
+                Console.Clear();
                 return items.Where(item => item.ItemCategory == category);
             }
             catch(Exception)
@@ -104,6 +106,7 @@ namespace ToDoList.DataControllers
                     string userInput = Console.ReadLine();
 
                     IEnumerable<Item> searchedItems = GetItemsByCategory(userInput);
+                    Console.Clear();
                     foreach (var item in searchedItems)
                     {
                         base.PrintItem(item);

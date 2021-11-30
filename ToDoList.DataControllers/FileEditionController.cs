@@ -48,6 +48,7 @@ namespace ToDoList.DataControllers
             }
 
             dataProvider.AddCategory(categoryName);
+            DisplayMessage("Successfully added new category");
         }
 
         private void AddNewItem()
@@ -94,16 +95,20 @@ namespace ToDoList.DataControllers
             }
 
             dataProvider.AddItem(newItem);
+            DisplayMessage("Successfully added new item");
         }
 
         private void DeleteItem()
         {
+
             Item itemToDelete = GetItemByID("Provide ID of item to delete");
             dataProvider.RemoveItem(itemToDelete);
+            DisplayMessage("Successfully deleted item");
         }
 
         private void DeleteCategory()
         {
+
             Console.WriteLine("Please provide the category name to delete");
             Console.WriteLine("- This will delete all items with this category -");
             string userInput = Console.ReadLine();
@@ -114,6 +119,7 @@ namespace ToDoList.DataControllers
                 dataProvider.RemoveItems(ItemsToDelete.ToList());
             }
             dataProvider.RemoveCategory(userInput);
+            DisplayMessage("Successfully deleted category");
         }           
         
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToDoList.DataControllers
 {
-    interface IFileDataControllersProvider
+    interface IFileDataController
     {
         public void ChooseMainOption();
     }

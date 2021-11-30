@@ -4,7 +4,7 @@ using ToDoList.DataAccess.Models;
 
 namespace ToDoList.Views
 {
-    public class Options : IOptionsProvider
+    public class Options : IOptions
     {
         private void printOptions(string[] options, string msg)
         {
@@ -30,6 +30,7 @@ namespace ToDoList.Views
 
         public void PrintEditionOptions()
         {
+            Console.Clear();
             string[] editionOptions = new string[] { 
                 "Add new Category", 
                 "Add new item", 
@@ -43,6 +44,7 @@ namespace ToDoList.Views
 
         public void PrintItemSearchOptions()
         {
+            Console.Clear();
             string[] itemOptions = new string[] { 
                 "Get single item from ID", 
                 "Get items with specific category" 
@@ -71,6 +73,12 @@ namespace ToDoList.Views
                 Console.WriteLine($"{index + 1}. {category}");
                 index++;
             }
+        }
+
+        public void DisplayMessage(string msg)
+        {
+            Console.Clear();
+            Console.WriteLine($"{msg}");
         }
 
     }
