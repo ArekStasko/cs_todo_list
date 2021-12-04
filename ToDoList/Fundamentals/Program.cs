@@ -7,7 +7,6 @@ namespace ToDoList
     {
         static void Main(string[] args)
         {
-
             var dataController = new FileDataController();
 
             while (true)

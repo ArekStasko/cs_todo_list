@@ -8,8 +8,8 @@ namespace ToDoList.DataAccess
 {
     public class FileDataProvider : IDataProvider
     {
-        private const string categoriesFilePath = @"D:\apps\toDoList\categories.txt";
-        private const string itemsFilePath = @"D:\apps\toDoList\items.txt";
+        private const string categoriesFilePath = @".\categories.txt";
+        private const string itemsFilePath = @".\items.txt";
         private const string separator = "|";
 
         private void InitializeItemsFile()
