@@ -86,8 +86,6 @@ namespace ToDoList.DataControllers
                 var showProvider = new ShowProvider();
                 showProvider.PrintManyItems(items);
                 }
-
-            }
             else if (userSelection == 2)
             {
                 optionsProvider.PrintItemSearchOptions();

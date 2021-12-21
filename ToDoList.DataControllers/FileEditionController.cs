@@ -9,9 +9,6 @@ namespace ToDoList.DataControllers
 {
     public class FileEditionController : FileDataController
     {
-        private FileDataProvider dataProvider;
-        private IEnumerable<string> categories;
-        private IEnumerable<Item> items;
 
         public void GetSelectedEditionOption(int selectedOption)
         {
@@ -185,8 +182,6 @@ namespace ToDoList.DataControllers
                 dataProvider.RemoveItems(ItemsToDelete.ToList());
             }
             dataProvider.RemoveCategory(userInput);
-            DisplayMessage("Successfully deleted category");
-        }           
         
             var showProvider = new ShowProvider();
             showProvider.DisplayMessage("Successfully deleted category");

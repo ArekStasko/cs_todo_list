@@ -9,7 +9,5 @@ namespace ToDoList.Views
         void PrintMainOptions();
         void PrintEditionOptions();
         void PrintItemSearchOptions();
-        void PrintItem(Item item);
-        void PrintCategories(IEnumerable<string> categories);
     }
 }
