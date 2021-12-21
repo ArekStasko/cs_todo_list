@@ -9,6 +9,9 @@ namespace ToDoList.DataControllers
 {
     public class FileEditionController : FileDataController
     {
+        private FileDataProvider dataProvider;
+        private IEnumerable<string> categories;
+        private IEnumerable<Item> items;
 
         public void GetSelectedEditionOption(int selectedOption)
         {
@@ -51,9 +54,9 @@ namespace ToDoList.DataControllers
                         Console.WriteLine("You don't have any category");
                     }
                     else
-                    {
+        {
                         DeleteCategory();
-                    }
+        }
                     break;
                 default:
                     Console.WriteLine("You provide wrong option number");
@@ -102,7 +105,7 @@ namespace ToDoList.DataControllers
         }
 
         private void AddNewItem()
-        {         
+        {
                 Console.WriteLine("Insert Item Name");
                 string ItemName = Console.ReadLine();
 
@@ -133,12 +136,12 @@ namespace ToDoList.DataControllers
                 ItemId = itemID,
                 ItemCategory = category
             };
-            
+
             dataProvider.AddItem(newItem);
 
             var showProvider = new ShowProvider();
             showProvider.DisplayMessage("Successfully added new item");
-        }
+            }
 
         private void ChangeItemCount()
         {
@@ -182,10 +185,13 @@ namespace ToDoList.DataControllers
                 dataProvider.RemoveItems(ItemsToDelete.ToList());
             }
             dataProvider.RemoveCategory(userInput);
-
+            DisplayMessage("Successfully deleted category");
+        }           
+        
             var showProvider = new ShowProvider();
             showProvider.DisplayMessage("Successfully deleted category");
-        }           
+        }
+
 
     }
 }

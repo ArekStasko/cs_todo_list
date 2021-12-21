@@ -55,5 +55,32 @@ namespace ToDoList.Views
             printOptions(itemOptions, msg);
         }
 
+        public void PrintItem(Item item)
+        {
+            string itemRow = String.Format(" | {0,5} | {1,5} | {2,5} | {3,5}| ",
+            item.ItemId,
+            item.ItemCategory,
+            item.ItemName,
+            item.ItemDescription
+            );
+            Console.WriteLine(itemRow);
+        }
+
+        public void PrintCategories(IEnumerable<string> categories)
+        {
+            int index = 0;
+            foreach (var category in categories)
+            {
+                Console.WriteLine($"{index + 1}. {category}");
+                index++;
+            }
+        }
+
+        public void DisplayMessage(string msg)
+        {
+            Console.Clear();
+            Console.WriteLine($"{msg}");
+        }
+
     }
 }

@@ -10,7 +10,7 @@ namespace ToDoList.DataControllers
     public class FileDataController : IFileDataController
     {
         private FileDataProvider dataProvider = new FileDataProvider();
-        
+
         private int GetUserSelection()
         {
             string selectedOption = Console.ReadLine();
@@ -85,6 +85,8 @@ namespace ToDoList.DataControllers
                 IEnumerable<Item> items = dataProvider.GetItems();
                 var showProvider = new ShowProvider();
                 showProvider.PrintManyItems(items);
+                }
+
             }
             else if (userSelection == 2)
             {
