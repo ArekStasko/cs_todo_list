@@ -1,6 +1,5 @@
 ﻿using System;
-using ToDoList.Storage;
-using ToDoList.Services;
+using ToDoList.DataControllers;
 
 namespace ToDoList
 {
@@ -8,35 +7,14 @@ namespace ToDoList
     {
         static void Main(string[] args)
         {
-            Options optionsInitializer = new Options();
-            MainStorage mainStorage = new MainStorage();
-            optionsInitializer.initializeOptions();
 
-            // Here i will implement inheritance
-            EditionServices actionServices = new EditionServices(mainStorage.items, mainStorage.categories);
-            ShowServices showServices = new ShowServices(mainStorage.items, mainStorage.categories);
+            var dataController = new FileDataController();
 
-            int selectedOption = 0;
-
-            while (selectedOption != 4)
+            while (true)
             {
-                selectedOption = optionsInitializer.getOptions();
-                switch (selectedOption)
-                {
-                    case 1:
-                        showServices.ShowAllItems();
-                        break;
-                    case 2:
-                        showServices.ShowSingleItem();
-                        break;
-                    case 3:
-                        int userSelection = optionsInitializer.GetEditionOptions();
-                        actionServices.ChooseEditionMethod(userSelection);
-                        break;
-                }
+                dataController.ChooseMainOption();
             }
-            Console.WriteLine("Goodbye !");
-            
+
         }
     }
 }
