@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ToDoList.DataAccess.Models;
+using Warehouse.DataAccess.Models;
 
-namespace ToDoList.Views
+namespace Warehouse.Views
 {
     public class ShowProvider
     {

@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoList.DataControllers\ToDoList.DataControllers.csproj" />
-    <ProjectReference Include="..\ToDoList.Views\ToDoList.Views.csproj" />
+    <ProjectReference Include="..\Warehouse.DataControllers\Warehouse.DataControllers.csproj" />
   </ItemGroup>
 
 </Project>

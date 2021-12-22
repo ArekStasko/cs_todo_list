@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ToDoList.DataAccess.Models;
+using Warehouse.DataAccess.Models;
 
-namespace ToDoList.DataAccess
+namespace Warehouse.DataAccess
 {
     public interface IDataProvider
     {

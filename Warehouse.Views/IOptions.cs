@@ -1,7 +1,6 @@
-﻿using ToDoList.DataAccess.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace ToDoList.Views
+namespace Warehouse.Views
 {
     public interface IOptions
     {

@@ -2,9 +2,9 @@ using NUnit.Framework;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
-using ToDoList.DataAccess.Models;
+using Warehouse.DataAccess.Models;
 
-namespace ToDoList.DataAccess.Tests.Unit
+namespace Warehouse.DataAccess.Tests.Unit
 {
     [TestFixture]
     public class FileDataProviderTests

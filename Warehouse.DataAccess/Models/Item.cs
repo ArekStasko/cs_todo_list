@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace ToDoList.DataAccess.Models
+namespace Warehouse.DataAccess.Models
 {
     public class Item
     {

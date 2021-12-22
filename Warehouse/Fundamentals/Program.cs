@@ -1,7 +1,7 @@
 ﻿using System;
-using ToDoList.DataControllers;
+using Warehouse.DataControllers;
 
-namespace ToDoList
+namespace Warehouse
 {
     public class Program
     {
